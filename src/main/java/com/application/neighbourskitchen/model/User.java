@@ -1,11 +1,17 @@
 package com.application.neighbourskitchen.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.io.Serializable;
 
 @Entity
-public class User {
+public class User implements Serializable {
 
+    @Id
+    @GeneratedValue
     private long id;
+
     private String firstName;
     private String lastName;
     private String address;

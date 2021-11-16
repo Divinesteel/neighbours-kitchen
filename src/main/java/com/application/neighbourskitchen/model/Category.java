@@ -1,9 +1,19 @@
 package com.application.neighbourskitchen.model;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import java.util.Set;
+
 public class Category {
 
-    private long id;
+    @Id
+    @GeneratedValue
+    private Long id;
     private String description;
+
+    @ManyToMany(mappedBy = "categorySet")
+    private Set<Food> foodSet;
 
     public Category(long id, String description) {
         this.id = id;

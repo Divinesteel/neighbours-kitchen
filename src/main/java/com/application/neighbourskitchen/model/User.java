@@ -1,16 +1,16 @@
 package com.application.neighbourskitchen.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 @Entity
-public class User implements Serializable {
+public class User {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     private String firstName;
     private String lastName;
@@ -18,6 +18,14 @@ public class User implements Serializable {
     private boolean isCook;
     private int phone;
     private long score;
+
+    @OneToMany(mappedBy = "sellerId")
+    private Set<Order> sellerOrders;
+    @OneToMany(mappedBy = "buyerId")
+    private Set<Order> buyerOrders;
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
+    private Set<Food> foodList;
 
     public User(long id, String firstName, String lastName, String address, boolean isCook, int phone, long score) {
         this.id = id;

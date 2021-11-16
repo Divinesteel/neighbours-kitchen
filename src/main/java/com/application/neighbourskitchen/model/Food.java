@@ -1,10 +1,13 @@
 package com.application.neighbourskitchen.model;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 public class Food {
 
-    private long id;
+    private Long id;
     private Byte[] image;
     private String title;
     private String description;
@@ -12,6 +15,13 @@ public class Food {
     private int portions;
     private int packages;
     private double price;
+
+    @ManyToMany
+    @JoinTable(name ="FOOD_CATEGORY")
+    private Set<Category> categorySet;
+
+    @ManyToOne
+    private User user;
 
     public Food(long id, Byte[] image, String title, String description, Date timeCooked, int portions, int packages, double price) {
         this.id = id;

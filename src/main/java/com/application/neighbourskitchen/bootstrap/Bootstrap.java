@@ -63,7 +63,7 @@ public class Bootstrap implements CommandLineRunner {
         categoryRepository.save(c1);
         categoryRepository.save(c2);
         categoryRepository.save(c3);
-
+//
         food1.setUser(user1);
         food1.setCategorySet(new HashSet<Category>(){
             {

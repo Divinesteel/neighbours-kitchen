@@ -49,7 +49,7 @@ public class StartingTests {
                 .score(4.5).build();
 
         food1 = Food.builder().title("Gemista").description("Ntomates kai piperies")
-                .timeCooked(new Date("17/11/2021")).portions(3).packages(1).price(1).user(user1).build();
+                .timeCooked(new Date("17/11/2021")).portions(3).packages(1).price(1).build();
     }
 
     @Test
@@ -74,8 +74,8 @@ public class StartingTests {
     @Test
     public void findFoodFromUser() {
         userRepository.save(user1);
+        food1.setUser(user1);
         foodRepository.save(food1);
-
         assertEquals(userRepository.findById(1l).get().getFoodList().stream().findFirst().get().getTitle(), "Gemista");
     }
 }

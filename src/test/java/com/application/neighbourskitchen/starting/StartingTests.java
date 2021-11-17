@@ -77,6 +77,8 @@ public class StartingTests {
     public void findFoodFromUser() {
         userRepository.save(user1);
         food1.setUser(user1);
+        user1.addFood(food1);
+        userRepository.save(user1);
         foodRepository.save(food1);
         assertEquals(userRepository.findById(1l).get().getFoodList().stream().findFirst().get().getTitle(), "Gemista");
     }

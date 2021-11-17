@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -30,8 +31,7 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user",fetch = FetchType.EAGER)
     private Set<Food> foodList;
 
-    public User() {
-    }
+    public User(){}
 
     public User(String firstName, String lastName, String address, boolean isCook, long phone, double score) {
         this.firstName = firstName;
@@ -43,6 +43,9 @@ public class User {
     }
 
     public void addFood(Food food){
+        if (foodList==null){
+            foodList = new HashSet<>();
+        }
         foodList.add(food);
     }
 

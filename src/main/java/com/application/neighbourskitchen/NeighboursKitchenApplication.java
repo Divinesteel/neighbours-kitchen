@@ -42,7 +42,6 @@ public class NeighboursKitchenApplication {
 			userRepository.save(user1);
 			userRepository.save(user2);
 
-
 			c.setFoodSet(new HashSet<Food>(){{
 				add(food1);
 			}});
@@ -72,13 +71,8 @@ public class NeighboursKitchenApplication {
 			foodRepository.save(food1);
 
 			Purchase purchase = new Purchase(2,user1,user2, new Date());
-
-
 			purchaseRepository.save(purchase);
 
-			User a1= userRepository.findById(1l).get();
-			User a2= userRepository.findById(2l).get();
-			System.out.println(a1);
 		};
 	}
 

@@ -66,4 +66,11 @@ public class StartingTests {
         foodRepository.save(food1);
         assertEquals(foodRepository.findById(1l).get().getUser().getFirstName(), "Stelios");
     }
+
+    @Test
+    public void findFoodFromUser() {
+        userRepository.save(user1);
+        foodRepository.save(food1);
+        assertEquals(userRepository.findById(1l).get().getFoodList().stream().findFirst().get().getTitle(), "Gemista");
+    }
 }

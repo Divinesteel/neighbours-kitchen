@@ -1,12 +1,14 @@
 package com.application.neighbourskitchen.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
+@Entity
 public class Food {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Byte[] image;
     private String title;
@@ -17,14 +19,17 @@ public class Food {
     private double price;
 
     @ManyToMany
-    @JoinTable(name ="FOOD_CATEGORY")
+    @JoinTable(name = "FOOD_CATEGORY")
     private Set<Category> categorySet;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     private User user;
 
-    public Food(long id, Byte[] image, String title, String description, Date timeCooked, int portions, int packages, double price) {
-        this.id = id;
+    public Food() {
+    }
+
+    public Food(Byte[] image, String title, String description, Date timeCooked, int portions, int packages, double price) {
         this.image = image;
         this.title = title;
         this.description = description;
@@ -34,11 +39,11 @@ public class Food {
         this.price = price;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -96,5 +101,21 @@ public class Food {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public Set<Category> getCategorySet() {
+        return categorySet;
+    }
+
+    public void setCategorySet(Set<Category> categorySet) {
+        this.categorySet = categorySet;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

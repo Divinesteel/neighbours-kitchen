@@ -1,34 +1,34 @@
 package com.application.neighbourskitchen.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String firstName;
     private String lastName;
     private String address;
     private boolean isCook;
-    private int phone;
-    private long score;
+    private long phone;
+    private double score;
 
-    @OneToMany(mappedBy = "sellerId")
-    private Set<Order> sellerOrders;
-    @OneToMany(mappedBy = "buyerId")
-    private Set<Order> buyerOrders;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "seller")
+    private Set<Purchase> purchasesAsSeller;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "buyer")
+    private Set<Purchase> purchasesAsBuyer;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Food> foodList;
 
-    public User(long id, String firstName, String lastName, String address, boolean isCook, int phone, long score) {
-        this.id = id;
+    public User() {
+    }
+
+    public User(String firstName, String lastName, String address, boolean isCook, long phone, double score) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -37,11 +37,11 @@ public class User {
         this.score = score;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -77,19 +77,43 @@ public class User {
         isCook = cook;
     }
 
-    public int getPhone() {
+    public long getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
 
-    public long getScore() {
+    public double getScore() {
         return score;
     }
 
-    public void setScore(long score) {
+    public void setScore(double score) {
         this.score = score;
+    }
+
+    public Set<Purchase> getPurchasesAsSeller() {
+        return purchasesAsSeller;
+    }
+
+    public void setPurchasesAsSeller(Set<Purchase> purchasesAsSeller) {
+        this.purchasesAsSeller = purchasesAsSeller;
+    }
+
+    public Set<Purchase> getPurchasesAsBuyer() {
+        return purchasesAsBuyer;
+    }
+
+    public void setPurchasesAsBuyer(Set<Purchase> purchasesAsBuyer) {
+        this.purchasesAsBuyer = purchasesAsBuyer;
+    }
+
+    public Set<Food> getFoodList() {
+        return foodList;
+    }
+
+    public void setFoodList(Set<Food> foodList) {
+        this.foodList = foodList;
     }
 }

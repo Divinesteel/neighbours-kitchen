@@ -61,6 +61,7 @@ public class StartingTests {
     @Test
     public void findFoodById() {
         userRepository.save(user1);
+        food1.setUser(user1);
         foodRepository.save(food1);
         assertEquals(foodRepository.findById(1l).get().getTitle(), "Gemista");
     }
@@ -68,6 +69,7 @@ public class StartingTests {
     @Test
     public void findUserFromFood() {
         userRepository.save(user1);
+        food1.setUser(user1);
         foodRepository.save(food1);
         assertEquals(foodRepository.findById(1l).get().getUser().getFirstName(), "Stelios");
     }

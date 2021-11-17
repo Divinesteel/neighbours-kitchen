@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.Date;
@@ -20,14 +21,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @TestInstance(TestInstance.Lifecycle.PER_METHOD)
 public class StartingTests {
 
-    @Autowired
-    UserRepository userRepository;
-    @Autowired
-    CategoryRepository categoryRepository;
-    @Autowired
-    FoodRepository foodRepository;
-    @Autowired
-    PurchaseRepository purchaseRepository;
+    private final UserRepository userRepository;
+    private final CategoryRepository categoryRepository;
+    private final FoodRepository foodRepository;
+    private final PurchaseRepository purchaseRepository;
+
+    public StartingTests(@Qualifier("userRepository") UserRepository userRepository,
+                         @Qualifier("categoryRepository") CategoryRepository categoryRepository,
+                         @Qualifier("foodRepository") FoodRepository foodRepository,
+                         @Qualifier("purchaseRepository") PurchaseRepository purchaseRepository) {
+        this.userRepository = userRepository;
+        this.categoryRepository = categoryRepository;
+        this.foodRepository = foodRepository;
+        this.purchaseRepository = purchaseRepository;
+    }
 
     User user1;
     User user2;

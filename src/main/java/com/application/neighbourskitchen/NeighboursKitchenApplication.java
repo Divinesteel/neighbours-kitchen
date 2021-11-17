@@ -8,6 +8,7 @@ import com.application.neighbourskitchen.repository.CategoryRepository;
 import com.application.neighbourskitchen.repository.FoodRepository;
 import com.application.neighbourskitchen.repository.PurchaseRepository;
 import com.application.neighbourskitchen.repository.UserRepository;
+import org.apache.tomcat.jni.Time;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.function.Function;
 
 @SpringBootApplication
 public class NeighboursKitchenApplication {
@@ -69,21 +71,14 @@ public class NeighboursKitchenApplication {
 			});
 			foodRepository.save(food1);
 
-			Purchase purchase = new Purchase(2,user1,user2);
-			user1.setPurchasesAsSeller(new HashSet<Purchase>(){{
-				add(purchase);
-			}});
-			user2.setPurchasesAsBuyer(new HashSet<Purchase>(){{
-				add(purchase);
-			}});
-			userRepository.save(user1);
-			userRepository.save(user2);
+			Purchase purchase = new Purchase(2,user1,user2, new Date());
+
 
 			purchaseRepository.save(purchase);
 
-
-
-
+			User a1= userRepository.findById(1l).get();
+			User a2= userRepository.findById(2l).get();
+			System.out.println(a1);
 		};
 	}
 

@@ -1,9 +1,14 @@
 package com.application.neighbourskitchen.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Builder
+@AllArgsConstructor
 public class User {
 
     @Id
@@ -17,12 +22,12 @@ public class User {
     private long phone;
     private double score;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "seller")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "seller",fetch = FetchType.EAGER)
     private Set<Purchase> purchasesAsSeller;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "buyer")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "buyer",fetch = FetchType.EAGER)
     private Set<Purchase> purchasesAsBuyer;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user",fetch = FetchType.EAGER)
     private Set<Food> foodList;
 
     public User() {

@@ -7,34 +7,34 @@ import java.util.Date;
 @Entity
 public class Purchase {
 
-    @EmbeddedId
-    private BuyerSeller id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private double price;
 
-    @MapsId("sellerId")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private User seller;
-    @MapsId("buyerId")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private User buyer;
 
+    private Date date;
+
     public Purchase() {
-        id = new BuyerSeller();
     }
 
-    public Purchase(double price, User seller, User buyer) {
-        id = new BuyerSeller();
+    public Purchase(double price, User seller, User buyer, Date date) {
         this.price = price;
         this.seller = seller;
         this.buyer = buyer;
+        this.date = date;
     }
 
-    public BuyerSeller getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(BuyerSeller id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -60,5 +60,13 @@ public class Purchase {
 
     public void setBuyer(User buyer) {
         this.buyer = buyer;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

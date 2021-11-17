@@ -1,10 +1,16 @@
 package com.application.neighbourskitchen.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
 @Entity
+@Builder
+@AllArgsConstructor
 public class Food {
 
     @Id

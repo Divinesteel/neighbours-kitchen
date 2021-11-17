@@ -9,6 +9,7 @@ import com.application.neighbourskitchen.repository.FoodRepository;
 import com.application.neighbourskitchen.repository.PurchaseRepository;
 import com.application.neighbourskitchen.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
@@ -42,8 +43,6 @@ public class Bootstrap implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
-        System.out.println("ASDASDASDASDASD");
 
         userRepository.save(user1);
         userRepository.save(user2);
@@ -79,5 +78,8 @@ public class Bootstrap implements CommandLineRunner {
         Purchase purchase = new Purchase(2,user1,user2, new Date());
         purchaseRepository.save(purchase);
 
+        System.out.println(userRepository.findById(1l).get().getPurchasesAsSeller().stream().findFirst().get().getSeller().getFirstName());
+
+        System.out.println(userRepository.findById(1l).get().getFoodList().stream().findFirst().get().getTitle());
     }
 }

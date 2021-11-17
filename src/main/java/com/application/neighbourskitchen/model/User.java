@@ -42,6 +42,10 @@ public class User {
         this.score = score;
     }
 
+    public void addFood(Food food){
+        foodList.add(food);
+    }
+
     public Long getId() {
         return id;
     }

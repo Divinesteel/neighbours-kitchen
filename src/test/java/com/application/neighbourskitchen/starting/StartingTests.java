@@ -1,5 +1,6 @@
 package com.application.neighbourskitchen.starting;
 
+import com.application.neighbourskitchen.bootstrap.Bootstrap;
 import com.application.neighbourskitchen.model.Food;
 import com.application.neighbourskitchen.model.User;
 import com.application.neighbourskitchen.repository.CategoryRepository;
@@ -7,34 +8,31 @@ import com.application.neighbourskitchen.repository.FoodRepository;
 import com.application.neighbourskitchen.repository.PurchaseRepository;
 import com.application.neighbourskitchen.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
-@TestInstance(TestInstance.Lifecycle.PER_METHOD)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class StartingTests {
 
-    private final UserRepository userRepository;
-    private final CategoryRepository categoryRepository;
-    private final FoodRepository foodRepository;
-    private final PurchaseRepository purchaseRepository;
-
-    public StartingTests(@Qualifier("userRepository") UserRepository userRepository,
-                         @Qualifier("categoryRepository") CategoryRepository categoryRepository,
-                         @Qualifier("foodRepository") FoodRepository foodRepository,
-                         @Qualifier("purchaseRepository") PurchaseRepository purchaseRepository) {
-        this.userRepository = userRepository;
-        this.categoryRepository = categoryRepository;
-        this.foodRepository = foodRepository;
-        this.purchaseRepository = purchaseRepository;
-    }
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
+    @Autowired
+    private FoodRepository foodRepository;
+    @Autowired
+    private PurchaseRepository purchaseRepository;
 
     User user1;
     User user2;
@@ -47,7 +45,7 @@ public class StartingTests {
                 .score(4.5).build();
 
         user2 = User.builder().firstName("Sofia").lastName("Kagkelari")
-                .address("Kapodistrioy 7 Egaleo").isCook(true).phone(6954787845l)
+                .address("Kapodistrioy 7 Egaleo").isCook(false).phone(6954787845l)
                 .score(4.5).build();
 
         food1 = Food.builder().title("Gemista").description("Ntomates kai piperies")
@@ -73,11 +71,11 @@ public class StartingTests {
         foodRepository.save(food1);
         assertEquals(foodRepository.findById(1l).get().getUser().getFirstName(), "Stelios");
     }
-
     @Test
     public void findFoodFromUser() {
         userRepository.save(user1);
         foodRepository.save(food1);
+
         assertEquals(userRepository.findById(1l).get().getFoodList().stream().findFirst().get().getTitle(), "Gemista");
     }
 }

@@ -16,12 +16,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String username;
+    private String password;
     private String firstName;
     private String lastName;
     private String address;
     private boolean isCook;
     private long phone;
     private double score;
+    private boolean enabled;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "seller",fetch = FetchType.EAGER)
     private Set<Purchase> purchasesAsSeller;
@@ -32,15 +35,6 @@ public class User {
     private Set<Food> foodList;
 
     public User(){}
-
-    public User(String firstName, String lastName, String address, boolean isCook, long phone, double score) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.isCook = isCook;
-        this.phone = phone;
-        this.score = score;
-    }
 
     public void addFood(Food food){
         if (foodList==null){
@@ -127,5 +121,29 @@ public class User {
 
     public void setFoodList(Set<Food> foodList) {
         this.foodList = foodList;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }

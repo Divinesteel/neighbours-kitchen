@@ -28,10 +28,16 @@ public class Bootstrap implements CommandLineRunner {
         this.purchaseFoodPortionsRepository = purchaseFoodPortionsRepository;
     }
 
-    User user1 = new User("Stelios","Andreolas","Kapodistrioy 7 Egaleo",true,6955542869L,4.5);
-    User user2 = new User("Sofia","Kagkelari","Kapodistrioy 7 Egaleo",false,6943026928L,0);
+    User user1 = User.builder().firstName("Stelios").lastName("Andreolas")
+                .address("Kapodistrioy 7 Egaleo").isCook(true).phone(6955542869l)
+                .score(4.5).build();
+
+    User user2 = User.builder().firstName("Sofia").lastName("Kagkelari")
+                .address("Kapodistrioy 7 Egaleo").isCook(false).phone(6954787845l)
+                .score(0).build();
 
     Food food1 = new Food(null,"Gemista","Ntomates kai  piperies",new Date("17/11/2021"),3,1,1);
+    Food food2 = new Food(null,"Pastitsio","skata bghke",new Date("17/11/2021"),5,0,1.5);
 
     Category c = Category.builder().description("Vegan").build();
     Category c1 = Category.builder().description("Ladera").build();
@@ -60,6 +66,8 @@ public class Bootstrap implements CommandLineRunner {
         categoryRepository.save(c1);
         categoryRepository.save(c2);
         categoryRepository.save(c3);
+
+        food2.setUser(user1);
 //
         food1.setUser(user1);
         food1.setCategorySet(new HashSet<Category>(){
@@ -71,12 +79,15 @@ public class Bootstrap implements CommandLineRunner {
             }
         });
         foodRepository.save(food1);
+        foodRepository.save(food2);
 
         Purchase purchase = new Purchase(2,user1,user2, new Date());
         purchaseRepository.save(purchase);
 
         PurchaseFoodPortions a = purchase.addFood(food1,2);
+        PurchaseFoodPortions b = purchase.addFood(food2,1);
         purchaseFoodPortionsRepository.save(a);
+        purchaseFoodPortionsRepository.save(b);
         System.out.println(userRepository.findById(1l).get().getPurchasesAsSeller().stream().findFirst().get().getSeller().getFirstName());
 
         System.out.println(userRepository.findById(1l).get().getFoodList().stream().findFirst().get().getTitle());

@@ -5,8 +5,7 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Builder
@@ -32,6 +31,9 @@ public class Food {
     @JoinColumn(nullable = false)
     private User user;
 
+    @OneToMany(mappedBy = "food", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PurchaseFoodPortions> purchasePortions =new ArrayList<>();;
+
     public Food() {
     }
 
@@ -43,6 +45,14 @@ public class Food {
         this.portions = portions;
         this.packages = packages;
         this.price = price;
+    }
+
+    public List<PurchaseFoodPortions> getPurchasePortions() {
+        return purchasePortions;
+    }
+
+    public void setPurchasePortions(List<PurchaseFoodPortions> purchasePortions) {
+        this.purchasePortions = purchasePortions;
     }
 
     public Long getId() {

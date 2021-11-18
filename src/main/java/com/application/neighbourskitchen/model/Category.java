@@ -1,9 +1,16 @@
 package com.application.neighbourskitchen.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Category {
 
     @Id
@@ -13,10 +20,6 @@ public class Category {
 
     @ManyToMany(mappedBy = "categorySet")
     private Set<Food> foodSet;
-
-    public Category(String description) {
-        this.description = description;
-    }
 
     public Long getId() {
         return id;

@@ -1,13 +1,7 @@
 package com.application.neighbourskitchen.bootstrap;
 
-import com.application.neighbourskitchen.model.Category;
-import com.application.neighbourskitchen.model.Food;
-import com.application.neighbourskitchen.model.Purchase;
-import com.application.neighbourskitchen.model.User;
-import com.application.neighbourskitchen.repository.CategoryRepository;
-import com.application.neighbourskitchen.repository.FoodRepository;
-import com.application.neighbourskitchen.repository.PurchaseRepository;
-import com.application.neighbourskitchen.repository.UserRepository;
+import com.application.neighbourskitchen.model.*;
+import com.application.neighbourskitchen.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -23,12 +17,15 @@ public class Bootstrap implements CommandLineRunner {
     private final FoodRepository foodRepository;
     private final PurchaseRepository purchaseRepository;
     private final CategoryRepository categoryRepository;
+    private final PurchaseFoodPortionsRepository purchaseFoodPortionsRepository;
 
-    public Bootstrap(UserRepository userRepository, FoodRepository foodRepository, PurchaseRepository purchaseRepository, CategoryRepository categoryRepository) {
+    public Bootstrap(UserRepository userRepository, FoodRepository foodRepository, PurchaseRepository purchaseRepository
+            , CategoryRepository categoryRepository,PurchaseFoodPortionsRepository purchaseFoodPortionsRepository) {
         this.userRepository = userRepository;
         this.foodRepository = foodRepository;
         this.purchaseRepository = purchaseRepository;
         this.categoryRepository = categoryRepository;
+        this.purchaseFoodPortionsRepository = purchaseFoodPortionsRepository;
     }
 
     User user1 = new User("Stelios","Andreolas","Kapodistrioy 7 Egaleo",true,6955542869L,4.5);
@@ -36,10 +33,10 @@ public class Bootstrap implements CommandLineRunner {
 
     Food food1 = new Food(null,"Gemista","Ntomates kai  piperies",new Date("17/11/2021"),3,1,1);
 
-    Category c = new Category("Vegan");
-    Category c1 = new Category("Ladera");
-    Category c2 = new Category("Vegeterian");
-    Category c3 = new Category("Gluten Free");
+    Category c = Category.builder().description("Vegan").build();
+    Category c1 = Category.builder().description("Ladera").build();
+    Category c2 = Category.builder().description("Vegeterian").build();
+    Category c3 = Category.builder().description("Gluten Free").build();
 
     @Override
     public void run(String... args) throws Exception {
@@ -78,8 +75,12 @@ public class Bootstrap implements CommandLineRunner {
         Purchase purchase = new Purchase(2,user1,user2, new Date());
         purchaseRepository.save(purchase);
 
+        PurchaseFoodPortions a = purchase.addFood(food1,2);
+        purchaseFoodPortionsRepository.save(a);
         System.out.println(userRepository.findById(1l).get().getPurchasesAsSeller().stream().findFirst().get().getSeller().getFirstName());
 
         System.out.println(userRepository.findById(1l).get().getFoodList().stream().findFirst().get().getTitle());
+
+
     }
 }

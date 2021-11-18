@@ -1,6 +1,7 @@
 package com.application.neighbourskitchen.starting;
 
 import com.application.neighbourskitchen.bootstrap.Bootstrap;
+import com.application.neighbourskitchen.model.Category;
 import com.application.neighbourskitchen.model.Food;
 import com.application.neighbourskitchen.model.User;
 import com.application.neighbourskitchen.repository.CategoryRepository;
@@ -37,6 +38,8 @@ public class StartingTests {
     User user1;
     User user2;
     Food food1;
+    Category category1;
+    Category category2;
 
     @BeforeEach
     public void prepare() {
@@ -50,6 +53,9 @@ public class StartingTests {
 
         food1 = Food.builder().title("Gemista").description("Ntomates kai piperies")
                 .timeCooked(new Date("17/11/2021")).portions(3).packages(1).price(1).build();
+
+        category1 = Category.builder().description("Ladero").build();
+
     }
 
     @Test
@@ -80,6 +86,12 @@ public class StartingTests {
         user1.addFood(food1);
         userRepository.save(user1);
         foodRepository.save(food1);
+        assertEquals(userRepository.findById(1l).get().getFoodList().stream().findFirst().get().getTitle(), "Gemista");
+    }
+
+    @Test
+    public void findCategoriesForFood() {
+
         assertEquals(userRepository.findById(1l).get().getFoodList().stream().findFirst().get().getTitle(), "Gemista");
     }
 }

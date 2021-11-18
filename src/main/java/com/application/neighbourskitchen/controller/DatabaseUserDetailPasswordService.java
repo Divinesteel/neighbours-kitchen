@@ -2,6 +2,7 @@ package com.application.neighbourskitchen.controller;
 
 import com.application.neighbourskitchen.model.User;
 import com.application.neighbourskitchen.repository.UserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsPasswordService;
 import org.springframework.stereotype.Service;
@@ -13,20 +14,18 @@ public class DatabaseUserDetailPasswordService
         implements UserDetailsPasswordService {
 
     private final UserRepository userRepository;
-    private final UserDetailsMapper userDetailsMapper;
+    private final ModelMapper userDetailsMapper;
 
-    public DatabaseUserDetailPasswordService(UserRepository userRepository, UserDetailsMapper userDetailsMapper) {
+    public DatabaseUserDetailPasswordService(UserRepository userRepository, ModelMapper userDetailsMapper) {
         this.userRepository = userRepository;
         this.userDetailsMapper = userDetailsMapper;
     }
 
-    // constructor ...
-
     @Override
     public UserDetails updatePassword(UserDetails user, String newPassword) {
         User userCredentials =
-                userRepository.findByUsername(user.getUsername()).get();
+                userRepository.findByUsername(user.getUsername()).ifPresentOrElse(,);
         userCredentials.setPassword(newPassword);
-        return userDetailsMapper.toUserDetails(userCredentials);
+        return userDetailsMapper.map(userCredentials,UserDetails.class);
     }
 }

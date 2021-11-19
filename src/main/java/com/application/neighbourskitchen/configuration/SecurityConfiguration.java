@@ -1,6 +1,6 @@
 package com.application.neighbourskitchen.configuration;
 
-import com.application.neighbourskitchen.controller.DatabaseUserDetailPasswordService;
+import com.application.neighbourskitchen.services.DatabaseUserDetailPasswordService;
 import com.application.neighbourskitchen.controller.DatabaseUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

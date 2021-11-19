@@ -1,4 +1,4 @@
-package com.application.neighbourskitchen.controller;
+package com.application.neighbourskitchen.services;
 
 import com.application.neighbourskitchen.model.User;
 import com.application.neighbourskitchen.repository.UserRepository;

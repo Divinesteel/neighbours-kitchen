@@ -13,9 +13,6 @@ import java.util.Set;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     private String username;
     private String password;
     private String firstName;
@@ -41,14 +38,6 @@ public class User {
             foodList = new HashSet<>();
         }
         foodList.add(food);
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFirstName() {

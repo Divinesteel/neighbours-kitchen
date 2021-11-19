@@ -9,15 +9,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserCredentialsDto {
+public class UserDetailsDto {
 
-    private String username;
-    private String password;
     private String firstName;
     private String lastName;
     private String address;
     private boolean isCook;
     private long phone;
-    private boolean enabled;
 
 }

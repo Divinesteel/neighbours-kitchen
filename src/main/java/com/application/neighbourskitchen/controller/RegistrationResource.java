@@ -30,7 +30,12 @@ public class RegistrationResource {
                 .enabled(true)
                 .username(userCredentialsDto.getUsername())
                 .password(passwordEncoder.encode(userCredentialsDto.getPassword()))
-//                .roles(Set.of("USER"))
+                .address(userCredentialsDto.getAddress())
+                .firstName(userCredentialsDto.getFirstName())
+                .lastName(userCredentialsDto.getLastName())
+                .phone(userCredentialsDto.getPhone())
+                .isCook(userCredentialsDto.isCook())
+                .enabled(true)
                 .build();
         userRepository.save(user);
     }

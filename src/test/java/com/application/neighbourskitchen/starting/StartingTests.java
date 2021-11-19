@@ -43,11 +43,11 @@ public class StartingTests {
 
     @BeforeEach
     public void prepare() {
-        user1 = User.builder().firstName("Stelios").lastName("Andreolas")
+        user1 = User.builder().username("Divinesteel").firstName("Stelios").lastName("Andreolas")
                 .address("Kapodistrioy 7 Egaleo").isCook(true).phone(6955542869l)
                 .score(4.5).build();
 
-        user2 = User.builder().firstName("Sofia").lastName("Kagkelari")
+        user2 = User.builder().username("Lauren").firstName("Sofia").lastName("Kagkelari")
                 .address("Kapodistrioy 7 Egaleo").isCook(false).phone(6954787845l)
                 .score(4.5).build();
 
@@ -61,7 +61,7 @@ public class StartingTests {
     @Test
     public void findUserById() {
         userRepository.save(user1);
-        assertEquals(userRepository.findById(1l).get().getFirstName(), "Stelios");
+        assertEquals(userRepository.findById("Divinesteel").get().getFirstName(), "Stelios");
     }
 
     @Test
@@ -86,12 +86,12 @@ public class StartingTests {
         user1.addFood(food1);
         userRepository.save(user1);
         foodRepository.save(food1);
-        assertEquals(userRepository.findById(1l).get().getFoodList().stream().findFirst().get().getTitle(), "Gemista");
+        assertEquals(userRepository.findById("Divinesteel").get().getFoodList().stream().findFirst().get().getTitle(), "Gemista");
     }
 
     @Test
     public void findCategoriesForFood() {
 
-        assertEquals(userRepository.findById(1l).get().getFoodList().stream().findFirst().get().getTitle(), "Gemista");
+        assertEquals(userRepository.findById("Divinesteel").get().getFoodList().stream().findFirst().get().getTitle(), "Gemista");
     }
 }

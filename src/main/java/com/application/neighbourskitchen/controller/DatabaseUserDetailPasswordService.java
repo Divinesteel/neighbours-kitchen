@@ -24,7 +24,7 @@ public class DatabaseUserDetailPasswordService
     @Override
     public UserDetails updatePassword(UserDetails user, String newPassword) {
         User userCredentials =
-                userRepository.findByUsername(user.getUsername()).ifPresentOrElse(,);
+                userRepository.findByUsername(user.getUsername()).get();
         userCredentials.setPassword(newPassword);
         return userDetailsMapper.map(userCredentials,UserDetails.class);
     }

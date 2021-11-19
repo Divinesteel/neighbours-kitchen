@@ -3,8 +3,6 @@ package com.application.neighbourskitchen.bootstrap;
 import com.application.neighbourskitchen.model.*;
 import com.application.neighbourskitchen.repository.*;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -82,9 +80,9 @@ public class Bootstrap implements CommandLineRunner {
         categoryRepository.save(c2);
         categoryRepository.save(c3);
 
-        food2.setUser(user1);
+        food2.setCook(user1);
 //
-        food1.setUser(user1);
+        food1.setCook(user1);
         food1.setCategorySet(new HashSet<Category>() {
             {
                 add(c);

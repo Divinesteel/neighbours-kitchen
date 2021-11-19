@@ -9,11 +9,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Optional;
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
 
     UserRepository userRepository;
@@ -24,14 +26,14 @@ public class UserController {
         this.modelMapper = modelMapper;
     }
 
-    @GetMapping("/users/{username}")
+    @GetMapping("/getUserDetails/{username}")
     @ResponseBody
     public UserDetailsDto getUserDetails(@PathVariable String username){
         Optional<User> userOpt = userRepository.findById(username);
         if (userOpt.isPresent()){
             return modelMapper.map(userOpt.get(),UserDetailsDto.class);
         }else{
-            throw new UserNotFoundException("User "+username +" not found");
+            throw new UserNotFoundException(username);
         }
     }
 }

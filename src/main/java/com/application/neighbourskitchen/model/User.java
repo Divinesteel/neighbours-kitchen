@@ -28,7 +28,7 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "buyer",fetch = FetchType.EAGER)
     private Set<Purchase> purchasesAsBuyer;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user",fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cook",fetch = FetchType.EAGER)
     private Set<Food> foodList;
 
     public User(){}

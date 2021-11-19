@@ -2,7 +2,6 @@ package com.application.neighbourskitchen.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.*;
@@ -29,7 +28,7 @@ public class Food {
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    private User user;
+    private User cook;
 
     @OneToMany(mappedBy = "food", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PurchaseFoodPortions> purchasePortions =new ArrayList<>();;
@@ -127,11 +126,11 @@ public class Food {
         this.categorySet = categorySet;
     }
 
-    public User getUser() {
-        return user;
+    public User getCook() {
+        return cook;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setCook(User cook) {
+        this.cook = cook;
     }
 }

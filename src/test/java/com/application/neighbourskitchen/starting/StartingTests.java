@@ -1,6 +1,5 @@
 package com.application.neighbourskitchen.starting;
 
-import com.application.neighbourskitchen.bootstrap.Bootstrap;
 import com.application.neighbourskitchen.model.Category;
 import com.application.neighbourskitchen.model.Food;
 import com.application.neighbourskitchen.model.User;
@@ -9,12 +8,8 @@ import com.application.neighbourskitchen.repository.FoodRepository;
 import com.application.neighbourskitchen.repository.PurchaseRepository;
 import com.application.neighbourskitchen.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.DirtiesContext;
 
@@ -67,7 +62,7 @@ public class StartingTests {
     @Test
     public void findFoodById() {
         userRepository.save(user1);
-        food1.setUser(user1);
+        food1.setCook(user1);
         foodRepository.save(food1);
         assertEquals(foodRepository.findById(1l).get().getTitle(), "Gemista");
     }
@@ -75,14 +70,14 @@ public class StartingTests {
     @Test
     public void findUserFromFood() {
         userRepository.save(user1);
-        food1.setUser(user1);
+        food1.setCook(user1);
         foodRepository.save(food1);
-        assertEquals(foodRepository.findById(1l).get().getUser().getFirstName(), "Stelios");
+        assertEquals(foodRepository.findById(1l).get().getCook().getFirstName(), "Stelios");
     }
     @Test
     public void findFoodFromUser() {
         userRepository.save(user1);
-        food1.setUser(user1);
+        food1.setCook(user1);
         user1.addFood(food1);
         userRepository.save(user1);
         foodRepository.save(food1);

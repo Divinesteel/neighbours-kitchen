@@ -33,21 +33,12 @@ public class FoodController {
         this.modelMapper = modelMapper;
     }
 
-    @GetMapping("/getFoodByUser/{username}")
+    @GetMapping("/getAllFoodsByUser/{username}")
     @ResponseBody
     public FoodListDto getFoodDto(@PathVariable String username) {
         User user = userRepository.findByUsername(username).get();
 
         try{
-//            modelMapper.addMappings(new PropertyMap<FoodListDto, User>() {
-//                @Override
-//                protected void configure() {
-//                    destination.getFoodList().forEach(x->{
-//                        skip(x.getCook());
-//                    });
-////                    skip(destination.getFoodList());
-//                }
-//            });
             FoodListDto foodListDto = new FoodListDto(user.getFoodList());
 
             return foodListDto;

@@ -1,29 +1,43 @@
 {
-	"variables": [],
 	"info": {
+		"_postman_id": "aaf89d74-4537-4818-a3eb-eae73fb83053",
 		"name": "Neighbours Kitchen",
-		"_postman_id": "6bc67cd6-3227-2b89-3b7e-1b4ba96aeb44",
-		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Registration",
 			"request": {
-				"url": "localhost:8080/registration",
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
+						"value": "application/json"
 					}
 				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\"username\":\"Divinesteel\",\n\t\"password\":\"jaka2957apujq!#\",\n\t\"firstName\":\"Stylianos\",\n\t\"lastName\":\"Andreolas\",\n\t\"address\":\"Kapodistrioy 7\",\n\t\"isCook\":true,\n\t\"phone\":\"6955542869\",\n\t\"enabled\":true\n}\n"
 				},
-				"description": ""
+				"url": "localhost:8080/registration"
+			},
+			"response": []
+		},
+		{
+			"name": "GetUserDetails",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/user/getUserDetails/Divinesteel"
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllFoodsByUser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/food/getAllFoodsByUser/Divinesteel"
 			},
 			"response": []
 		}

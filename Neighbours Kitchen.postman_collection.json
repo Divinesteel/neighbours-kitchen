@@ -1,46 +1,31 @@
 {
-	"id": "6bc67cd6-3227-2b89-3b7e-1b4ba96aeb44",
-	"name": "Neighbours Kitchen",
-	"description": "",
-	"order": [
-		"55e7ba2b-e688-80ea-4e54-7fc162470f9c"
-	],
-	"folders": [],
-	"folders_order": [],
-	"timestamp": 1637344891802,
-	"owner": "2443270",
-	"public": false,
-	"requests": [
+	"variables": [],
+	"info": {
+		"name": "Neighbours Kitchen",
+		"_postman_id": "6bc67cd6-3227-2b89-3b7e-1b4ba96aeb44",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
 		{
-			"id": "55e7ba2b-e688-80ea-4e54-7fc162470f9c",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "localhost:8080/registration",
-			"queryParams": [],
-			"pathVariables": {},
-			"pathVariableData": [],
-			"preRequestScript": null,
-			"method": "POST",
-			"collectionId": "6bc67cd6-3227-2b89-3b7e-1b4ba96aeb44",
-			"data": [],
-			"dataMode": "raw",
 			"name": "Registration",
-			"description": "",
-			"descriptionFormat": "html",
-			"time": 1637344893523,
-			"version": 2,
-			"responses": [],
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"rawModeData": "{\"username\":\"Divinesteel\",\n\t\"password\":\"jaka2957apujq!#\",\n\t\"firstName\":\"Stylianos\",\n\t\"lastName\":\"Andreolas\",\n\t\"address\":\"Kapodistrioy 7\",\n\t\"isCook\":true,\n\t\"phone\":\"6955542869\",\n\t\"enabled\":true\n}\n"
+			"request": {
+				"url": "localhost:8080/registration",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"Divinesteel\",\n\t\"password\":\"jaka2957apujq!#\",\n\t\"firstName\":\"Stylianos\",\n\t\"lastName\":\"Andreolas\",\n\t\"address\":\"Kapodistrioy 7\",\n\t\"isCook\":true,\n\t\"phone\":\"6955542869\",\n\t\"enabled\":true\n}\n"
+				},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }

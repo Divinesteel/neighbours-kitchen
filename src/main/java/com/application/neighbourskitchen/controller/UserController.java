@@ -1,6 +1,6 @@
 package com.application.neighbourskitchen.controller;
 
-import com.application.neighbourskitchen.dto.UserCredentialsDto;
+import com.application.neighbourskitchen.dto.AllCooksListDto;
 import com.application.neighbourskitchen.dto.UserDetailsDto;
 import com.application.neighbourskitchen.exception.UserNotFoundException;
 import com.application.neighbourskitchen.model.User;
@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/user")
@@ -26,7 +28,7 @@ public class UserController {
         this.modelMapper = modelMapper;
     }
 
-    @GetMapping("/getUserDetails/{username}")
+    @GetMapping("/getUserBasicDetails/{username}")
     @ResponseBody
     public UserDetailsDto getUserDetails(@PathVariable String username){
         Optional<User> userOpt = userRepository.findById(username);
@@ -36,4 +38,13 @@ public class UserController {
             throw new UserNotFoundException(username);
         }
     }
+
+    @GetMapping("/getAllCooksBasicDetails")
+    public Set<UserDetailsDto> getAllCookers(){
+        AllCooksListDto allCooksListDto = new AllCooksListDto(userRepository.findByIsCook(true));
+
+        Set<UserDetailsDto> cooksDetailed = new HashSet<>();
+        return cooksDetailed;
+    }
+
 }

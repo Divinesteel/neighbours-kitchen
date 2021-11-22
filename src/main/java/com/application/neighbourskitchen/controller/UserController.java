@@ -40,11 +40,11 @@ public class UserController {
     }
 
     @GetMapping("/getAllCooksBasicDetails")
-    public Set<UserDetailsDto> getAllCookers(){
+    @ResponseBody
+    public AllCooksListDto getAllCookers(){
         AllCooksListDto allCooksListDto = new AllCooksListDto(userRepository.findByIsCook(true));
 
-        Set<UserDetailsDto> cooksDetailed = new HashSet<>();
-        return cooksDetailed;
+        return allCooksListDto;
     }
 
 }

@@ -21,6 +21,7 @@ public class Bootstrap implements CommandLineRunner {
 
     User user1;
     User user2;
+    User user3;
     Food food1;
     Food food2;
     Category c;
@@ -39,6 +40,10 @@ public class Bootstrap implements CommandLineRunner {
 
     private void prepareProperties(){
         user1 = User.builder().username("Divinesteel").password(passwordEncoder.encode("jaka2957")).firstName("Stelios").lastName("Andreolas")
+                .address("Kapodistrioy 7 Egaleo").isCook(true).phone(6955542869l)
+                .score(4.5).build();
+
+        user3 = User.builder().username("qweqwe").password(passwordEncoder.encode("ddd")).firstName("Giorgos").lastName("Xenidis")
                 .address("Kapodistrioy 7 Egaleo").isCook(true).phone(6955542869l)
                 .score(4.5).build();
 
@@ -62,6 +67,8 @@ public class Bootstrap implements CommandLineRunner {
 
         userRepository.save(user1);
         userRepository.save(user2);
+        userRepository.save(user3);
+
 
         c.setFoodSet(new HashSet<Food>() {{
             add(food1);

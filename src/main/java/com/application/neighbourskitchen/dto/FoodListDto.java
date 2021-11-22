@@ -19,8 +19,8 @@ public class FoodListDto {
 
     public FoodListDto(Set<Food> foodList) {
         foodDetailsList = new HashSet<>();
-        foodList.forEach(x->{
-            FoodDetailsDto foodDetailsDto = new FoodDetailsDto(x);
+        foodList.forEach(food->{
+            FoodDetailsDto foodDetailsDto = new FoodDetailsDto(food);
             foodDetailsList.add(foodDetailsDto);
         });
     }

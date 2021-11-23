@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 @Setter
 public class AllCooksListDto {
 
-    Set<UserDetailsDto> cooksSet;
+    private Set<UserDetailsDto> cooksSet;
 
     public AllCooksListDto(Set<User> cookSet){
         cooksSet = new HashSet<>();

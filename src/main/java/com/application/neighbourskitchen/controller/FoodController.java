@@ -1,5 +1,6 @@
 package com.application.neighbourskitchen.controller;
 
+import com.application.neighbourskitchen.dto.AllAvailableFoodsDto;
 import com.application.neighbourskitchen.dto.FoodListDto;
 import com.application.neighbourskitchen.exception.FoodListNotFoundException;
 import com.application.neighbourskitchen.exception.UserNotFoundException;
@@ -45,6 +46,14 @@ public class FoodController {
         }catch (RuntimeException exception){
             throw new UserNotFoundException(username);
         }
+    }
+
+    @GetMapping("/getAvailableFoods")
+    @ResponseBody
+    public AllAvailableFoodsDto getAvailableFoods(){
+        AllAvailableFoodsDto allAvailableFoodsDto = new AllAvailableFoodsDto(foodRepository.isAvailable(true));
+
+        return allAvailableFoodsDto;
     }
 
 }

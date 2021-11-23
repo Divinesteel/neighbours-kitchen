@@ -3,6 +3,7 @@ package com.application.neighbourskitchen.bootstrap;
 import com.application.neighbourskitchen.model.*;
 import com.application.neighbourskitchen.repository.*;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -43,16 +44,16 @@ public class Bootstrap implements CommandLineRunner {
                 .address("Kapodistrioy 7 Egaleo").isCook(true).phone(6955542869l)
                 .score(4.5).build();
 
-        user3 = User.builder().username("qweqwe").password(passwordEncoder.encode("ddd")).firstName("Giorgos").lastName("Xenidis")
-                .address("Kapodistrioy 7 Egaleo").isCook(true).phone(6955542869l)
-                .score(4.5).build();
-
         user2 = User.builder().username("Lauren").firstName("Sofia").lastName("Kagkelari")
                 .address("Kapodistrioy 7 Egaleo").isCook(false).phone(6954787845l)
                 .score(0).build();
 
-        food1 = new Food(null, "Gemista", "Ntomates kai  piperies", new Date("17/11/2021"), 3, 1, 1);
-        food2 = new Food(null, "Pastitsio", "skata bghke", new Date("17/11/2021"), 5, 0, 1.5);
+        user3 = User.builder().username("GeorgeXen").password(passwordEncoder.encode("pswd")).firstName("Giorgos").lastName("Xenidis")
+                .address("Neo Faliro").isCook(true).phone(6976530703l)
+                .score(4.5).build();
+
+        food1 = new Food(null, "Gemista", "Ntomates kai  piperies", new Date("17/11/2021"), 3, true, 1, 1);
+        food2 = new Food(null, "Pastitsio", "skata bghke", new Date("17/11/2021"), 5, true, 0, 1.5 );
 
         c = Category.builder().description("Vegan").build();
         c1 = Category.builder().description("Ladera").build();

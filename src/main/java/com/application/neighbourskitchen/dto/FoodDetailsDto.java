@@ -28,6 +28,7 @@ public class FoodDetailsDto {
         description = food.getDescription();
         timeCooked = food.getTimeCooked();
         portions = food.getPortions();
+        isAvailable = food.isAvailable();
         packages = food.getPackages();
         price = food.getPrice();
     }
@@ -38,6 +39,7 @@ public class FoodDetailsDto {
     private String description;
     private Date timeCooked;
     private int portions;
+    private boolean isAvailable;
     private int packages;
     private double price;
 

@@ -1,27 +1,28 @@
 package com.application.neighbourskitchen.dto;
 
 import com.application.neighbourskitchen.model.Food;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
-@Getter
 @Setter
-public class FoodListDto {
+@Getter
+public class AllAvailableFoodsDto {
 
-    private Set<FoodDetailsDto> foodDetailsList;
+    private Set<FoodDetailsDto> availableFoods;
 
-    public FoodListDto(Set<Food> foodList) {
-        foodDetailsList = new HashSet<>();
-        foodList.forEach(food->{
+    public AllAvailableFoodsDto(Set<Food> availableFoods){
+        this.availableFoods = new HashSet<>();
+
+        availableFoods.forEach(food -> {
             FoodDetailsDto foodDetailsDto = new FoodDetailsDto(food);
-            foodDetailsList.add(foodDetailsDto);
+            this.availableFoods.add(foodDetailsDto);
         });
     }
+
 }

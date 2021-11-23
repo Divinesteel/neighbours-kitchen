@@ -19,6 +19,7 @@ public class Food {
     private String description;
     private Date timeCooked;
     private int portions;
+    private boolean isAvailable;
     private int packages;
     private double price;
 
@@ -36,12 +37,13 @@ public class Food {
     public Food() {
     }
 
-    public Food(Byte[] image, String title, String description, Date timeCooked, int portions, int packages, double price) {
+    public Food(Byte[] image, String title, String description, Date timeCooked, int portions, boolean isAvailable, int packages, double price) {
         this.image = image;
         this.title = title;
         this.description = description;
         this.timeCooked = timeCooked;
         this.portions = portions;
+        this.isAvailable = isAvailable;
         this.packages = packages;
         this.price = price;
     }
@@ -100,6 +102,14 @@ public class Food {
 
     public void setPortions(int portions) {
         this.portions = portions;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 
     public int getPackages() {

@@ -51,7 +51,7 @@ public class FoodController {
     @GetMapping("/getAvailableFoods")
     @ResponseBody
     public AllAvailableFoodsDto getAvailableFoods(){
-        AllAvailableFoodsDto allAvailableFoodsDto = new AllAvailableFoodsDto(foodRepository.findAll());
+        AllAvailableFoodsDto allAvailableFoodsDto = new AllAvailableFoodsDto(foodRepository.isAvailable(true));
 
         return allAvailableFoodsDto;
     }

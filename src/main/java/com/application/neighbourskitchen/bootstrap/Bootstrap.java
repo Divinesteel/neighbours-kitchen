@@ -3,6 +3,7 @@ package com.application.neighbourskitchen.bootstrap;
 import com.application.neighbourskitchen.model.*;
 import com.application.neighbourskitchen.repository.*;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -51,8 +52,8 @@ public class Bootstrap implements CommandLineRunner {
                 .address("Neo Faliro").isCook(true).phone(6976530703l)
                 .score(4.5).build();
 
-        food1 = new Food(null, "Gemista", "Ntomates kai  piperies", new Date("17/11/2021"), 3, 1, 1);
-        food2 = new Food(null, "Pastitsio", "skata bghke", new Date("17/11/2021"), 5, 0, 1.5);
+        food1 = new Food(null, "Gemista", "Ntomates kai  piperies", new Date("17/11/2021"), 3, true, 1, 1);
+        food2 = new Food(null, "Pastitsio", "skata bghke", new Date("17/11/2021"), 5, true, 0, 1.5 );
 
         c = Category.builder().description("Vegan").build();
         c1 = Category.builder().description("Ladera").build();

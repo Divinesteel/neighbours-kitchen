@@ -14,16 +14,14 @@ import java.util.Set;
 @Getter
 public class AllAvailableFoodsDto {
 
-    Set<FoodDetailsDto> availableFoods;
+    private Set<FoodDetailsDto> availableFoods;
 
-    public AllAvailableFoodsDto(List<Food> allFoodsList){
-        availableFoods = new HashSet<>();
+    public AllAvailableFoodsDto(Set<Food> availableFoods){
+        this.availableFoods = new HashSet<>();
 
-        allFoodsList.forEach(food -> {
-            if(food.getPortions() >= 1){
-                FoodDetailsDto foodDetailsDto = new FoodDetailsDto(food);
-                availableFoods.add(foodDetailsDto);
-            }
+        availableFoods.forEach(food -> {
+            FoodDetailsDto foodDetailsDto = new FoodDetailsDto(food);
+            this.availableFoods.add(foodDetailsDto);
         });
     }
 

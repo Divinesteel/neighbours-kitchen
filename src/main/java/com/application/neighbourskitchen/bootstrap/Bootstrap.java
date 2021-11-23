@@ -43,13 +43,13 @@ public class Bootstrap implements CommandLineRunner {
                 .address("Kapodistrioy 7 Egaleo").isCook(true).phone(6955542869l)
                 .score(4.5).build();
 
-        user3 = User.builder().username("qweqwe").password(passwordEncoder.encode("ddd")).firstName("Giorgos").lastName("Xenidis")
-                .address("Kapodistrioy 7 Egaleo").isCook(true).phone(6955542869l)
-                .score(4.5).build();
-
         user2 = User.builder().username("Lauren").firstName("Sofia").lastName("Kagkelari")
                 .address("Kapodistrioy 7 Egaleo").isCook(false).phone(6954787845l)
                 .score(0).build();
+
+        user3 = User.builder().username("GeorgeXen").password(passwordEncoder.encode("pswd")).firstName("Giorgos").lastName("Xenidis")
+                .address("Neo Faliro").isCook(true).phone(6976530703l)
+                .score(4.5).build();
 
         food1 = new Food(null, "Gemista", "Ntomates kai  piperies", new Date("17/11/2021"), 3, 1, 1);
         food2 = new Food(null, "Pastitsio", "skata bghke", new Date("17/11/2021"), 5, 0, 1.5);

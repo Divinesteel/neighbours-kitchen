@@ -1,4 +1,4 @@
-package com.application.neighbourskitchen.controller;
+package com.application.neighbourskitchen.services;
 
 import com.application.neighbourskitchen.dto.UserCredentialsDto;
 import com.application.neighbourskitchen.model.MyUserPrincipal;

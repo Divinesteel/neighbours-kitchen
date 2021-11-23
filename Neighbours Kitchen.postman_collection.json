@@ -17,9 +17,9 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"username\":\"Lala\",\n\t\"password\":\"123\",\n\t\"firstName\":\"Nikos\",\n\t\"lastName\":\"Qasa\",\n\t\"address\":\"Kapodistrioy 7\",\n\t\"cook\":true,\n\t\"phone\":\"6955542869\",\n\t\"enabled\":true\n}\n"
+					"raw": "{\"username\":\"Popo\",\n\t\"password\":\"123\",\n\t\"firstName\":\"Nikos\",\n\t\"lastName\":\"Qasa\",\n\t\"address\":\"Kapodistrioy 7\",\n\t\"cook\":true,\n\t\"phone\":\"6955542869\",\n\t\"enabled\":true\n}\n"
 				},
-				"url": "localhost:8080/registration"
+				"url": "109.242.89.255/registration"
 			},
 			"response": []
 		},
@@ -35,7 +35,7 @@
 				},
 				"method": "GET",
 				"header": [],
-				"url": "localhost:8080/user/getUserBasicDetails/Divinesteel"
+				"url": "109.242.89.255/user/getUserBasicDetails/Divinesteel"
 			},
 			"response": []
 		},
@@ -44,7 +44,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "localhost:8080/food/getAllFoodsByUser/Divinesteel"
+				"url": "109.242.89.255/food/getAllFoodsByUser/Divinesteel"
 			},
 			"response": []
 		},
@@ -56,7 +56,7 @@
 				},
 				"method": "GET",
 				"header": [],
-				"url": "localhost:8080/user/getAllCooksBasicDetails"
+				"url": "109.242.89.255/user/getAllCooksBasicDetails"
 			},
 			"response": []
 		},
@@ -65,7 +65,7 @@
 			"request": {
 				"method": "POST",
 				"header": [],
-				"url": "localhost:8080/logout"
+				"url": "109.242.89.255/logout"
 			},
 			"response": []
 		}

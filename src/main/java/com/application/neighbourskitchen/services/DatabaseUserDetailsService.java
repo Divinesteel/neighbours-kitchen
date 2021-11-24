@@ -1,8 +1,7 @@
 package com.application.neighbourskitchen.services;
 
 import com.application.neighbourskitchen.dto.UserCredentialsDto;
-import com.application.neighbourskitchen.model.MyUserPrincipal;
-import com.application.neighbourskitchen.model.User;
+import com.application.neighbourskitchen.model.UserAuth;
 import com.application.neighbourskitchen.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,6 +24,6 @@ public class DatabaseUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserCredentialsDto user =
                 userDetailsMapper.map(userRepository.findByUsername(username).get(),UserCredentialsDto.class);
-        return new MyUserPrincipal(user);
+        return new UserAuth(user);
     }
 }

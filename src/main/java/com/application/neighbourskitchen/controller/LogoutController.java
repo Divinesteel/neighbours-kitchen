@@ -18,7 +18,7 @@ public class LogoutController {
     @PostMapping("/logout")
     @ResponseBody
     public String logoutDo(HttpServletRequest request, HttpServletResponse response){
-        HttpSession session= request.getSession(false);
+        HttpSession session;
         SecurityContextHolder.clearContext();
         session= request.getSession(false);
         if(session != null) {

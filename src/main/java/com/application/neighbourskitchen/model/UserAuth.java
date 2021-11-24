@@ -6,10 +6,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class MyUserPrincipal implements UserDetails {
+public class UserAuth implements UserDetails {
     private UserCredentialsDto user;
 
-    public MyUserPrincipal(UserCredentialsDto user) {
+    public UserAuth(UserCredentialsDto user) {
         this.user = user;
     }
 

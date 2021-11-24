@@ -14,4 +14,5 @@ public class UserCredentialsDto extends UserDetailsDto{
     private String username;
     private String password;
     private boolean enabled;
+    private boolean openToPublic;
 }

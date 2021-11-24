@@ -19,6 +19,8 @@ public class UserDetailsDto {
     private String address;
     private boolean isCook;
     private long phone;
+    private boolean enabled;
+    private boolean openToPublic;
 
     public UserDetailsDto(User user) {
         this.firstName = user.getFirstName();
@@ -26,5 +28,7 @@ public class UserDetailsDto {
         this.address = user.getAddress();
         this.isCook = user.isCook();
         this.phone = user.getPhone();
+        this.enabled = user.isEnabled();
+        this.openToPublic = user.isOpenToPublic();
     }
 }

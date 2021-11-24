@@ -25,6 +25,7 @@ public class User {
     private boolean isCook;
     private long phone;
     private double score;
+    private long totalSales;
     private boolean enabled;
     private boolean openToPublic;
 
@@ -43,5 +44,9 @@ public class User {
             foodList = new HashSet<>();
         }
         foodList.add(food);
+    }
+
+    public void setUserStatus(boolean status){
+        setEnabled(status);
     }
 }

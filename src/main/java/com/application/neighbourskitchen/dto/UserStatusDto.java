@@ -9,8 +9,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserCredentialsDto extends UserDetailsDto{
+public class UserStatusDto {
 
     private String username;
-    private String password;
+    private boolean enabled;
 }

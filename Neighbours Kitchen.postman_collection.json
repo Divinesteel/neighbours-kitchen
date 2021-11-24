@@ -1,13 +1,16 @@
 {
+	"variables": [],
 	"info": {
-		"_postman_id": "1acf185a-af29-4805-876c-3f5d54374bd4",
 		"name": "Neighbours Kitchen",
+		"_postman_id": "165de109-f103-836c-fa6d-2621eff0c3ab",
+		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Registration",
 			"request": {
+				"url": "109.242.89.255/registration",
 				"method": "POST",
 				"header": [
 					{
@@ -19,7 +22,7 @@
 					"mode": "raw",
 					"raw": "{\"username\":\"Popo\",\n\t\"password\":\"123\",\n\t\"firstName\":\"Nikos\",\n\t\"lastName\":\"Qasa\",\n\t\"address\":\"Kapodistrioy 7\",\n\t\"cook\":true,\n\t\"phone\":\"6955542869\",\n\t\"enabled\":true\n}\n"
 				},
-				"url": "109.242.89.255/registration"
+				"description": ""
 			},
 			"response": []
 		},
@@ -29,43 +32,86 @@
 				"auth": {
 					"type": "basic",
 					"basic": {
+						"username": "Divinesteel",
 						"password": "jaka2957",
-						"username": "Divinesteel"
+						"showPassword": false
 					}
 				},
+				"url": "109.242.89.255/user/getUserBasicDetails/Divinesteel",
 				"method": "GET",
 				"header": [],
-				"url": "109.242.89.255/user/getUserBasicDetails/Divinesteel"
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
 			},
 			"response": []
 		},
 		{
 			"name": "GetAllFoodsByUser",
 			"request": {
+				"url": "109.242.89.255/food/getAllFoodsByUser/Divinesteel",
 				"method": "GET",
 				"header": [],
-				"url": "109.242.89.255/food/getAllFoodsByUser/Divinesteel"
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
 			},
 			"response": []
 		},
 		{
 			"name": "GetAllCooksBasicDetails",
 			"request": {
-				"auth": {
-					"type": "noauth"
-				},
+				"url": "109.242.89.255/user/getAllCooksBasicDetails",
 				"method": "GET",
 				"header": [],
-				"url": "109.242.89.255/user/getAllCooksBasicDetails"
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
 			},
 			"response": []
 		},
 		{
 			"name": "Logout",
 			"request": {
+				"url": "109.242.89.255/logout",
 				"method": "POST",
 				"header": [],
-				"url": "109.242.89.255/logout"
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "SetUserActiveStatus",
+			"request": {
+				"url": "109.242.89.255/user/setUserActiveStatus",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"Divinesteel\"\n,\"enabled\":\"false\"}"
+				},
+				"description": ""
 			},
 			"response": []
 		}

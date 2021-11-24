@@ -14,6 +14,7 @@ import java.util.Collection;
 @NoArgsConstructor
 public class UserDetailsDto {
 
+    private String username;
     private String firstName;
     private String lastName;
     private String address;
@@ -23,6 +24,7 @@ public class UserDetailsDto {
     private boolean openToPublic;
 
     public UserDetailsDto(User user) {
+        this.username = user.getUsername();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.address = user.getAddress();

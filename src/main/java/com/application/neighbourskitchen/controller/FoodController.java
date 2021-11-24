@@ -1,16 +1,19 @@
 package com.application.neighbourskitchen.controller;
 
+import com.application.neighbourskitchen.dto.FoodDetailsDto;
 import com.application.neighbourskitchen.dto.FoodListDto;
+import com.application.neighbourskitchen.dto.FoodWithUserDto;
+import com.application.neighbourskitchen.exception.UnauthorizedActionException;
 import com.application.neighbourskitchen.exception.UserNotFoundException;
+import com.application.neighbourskitchen.helper.UserActions;
+import com.application.neighbourskitchen.model.Food;
 import com.application.neighbourskitchen.model.User;
 import com.application.neighbourskitchen.repository.FoodRepository;
 import com.application.neighbourskitchen.repository.UserRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/food")
@@ -46,6 +49,33 @@ public class FoodController {
         FoodListDto allAvailableFoodsDto = new FoodListDto(foodRepository.isAvailable(true));
 
         return allAvailableFoodsDto;
+    }
+
+    @PostMapping("/addFood")
+    @ResponseBody
+    public FoodDetailsDto getAvailableFoods(@RequestBody FoodWithUserDto foodWithUserDto, Authentication auth){
+
+        UserActions<FoodWithUserDto,FoodDetailsDto> userActions = new UserActions() {
+            @Override
+            public FoodDetailsDto actionOnVerified(User user) {
+                Food food = Food.builder().image(foodWithUserDto.getFood().getImage())
+                        .description(foodWithUserDto.getFood().getDescription())
+                        .portions(foodWithUserDto.getFood().getPortions())
+                        .packages(foodWithUserDto.getFood().getPackages())
+                        .price(foodWithUserDto.getFood().getPrice())
+                        .timeCooked(foodWithUserDto.getFood().getTimeCooked())
+                        .title(foodWithUserDto.getFood().getTitle())
+                        .isAvailable(true)
+                        .cook(user)
+                        .build();
+
+                Food savedFood = foodRepository.save(food);
+                return modelMapper.map(savedFood,FoodDetailsDto.class);
+            }
+        };
+
+        return userActions.verifyOwnAction(userRepository,modelMapper,auth,foodWithUserDto,false);
+
     }
 
 }

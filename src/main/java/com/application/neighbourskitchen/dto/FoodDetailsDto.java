@@ -4,10 +4,7 @@ import com.application.neighbourskitchen.model.Category;
 import com.application.neighbourskitchen.model.Food;
 import com.application.neighbourskitchen.model.PurchaseFoodPortions;
 import com.application.neighbourskitchen.model.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -17,6 +14,7 @@ import java.util.Set;
 
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class FoodDetailsDto {

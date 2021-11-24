@@ -8,9 +8,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
-public class UserStatusDto {
+public class UserDetailsWrapperDto extends UserDetailsDto {
 
-    private String username;
-    private boolean enabled;
 }

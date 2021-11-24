@@ -29,21 +29,16 @@
 		{
 			"name": "GetUserDetails",
 			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": {
-						"username": "Divinesteel",
-						"password": "jaka2957",
-						"showPassword": false
-					}
-				},
 				"url": "109.242.89.255/user/getUserBasicDetails/Divinesteel",
 				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic RGl2aW5lc3RlZWw6amFrYTI5NTc=",
+						"description": ""
+					}
+				],
+				"body": {},
 				"description": ""
 			},
 			"response": []
@@ -109,7 +104,32 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"username\":\"Divinesteel\"\n,\"enabled\":\"false\"}"
+					"raw": "{\"username\":\"Divinesteel\"\n,\"enabled\":\"true\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "AddFood",
+			"request": {
+				"url": "109.242.89.255/food/addFood",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"Divinesteel\",\n\t\"food\":{\n\t\t\"image\":null,\n\t\t\"title\":\"Makaronia Me Kima,\n\t\t\"description\":\"value\",\n\t\t\"timeCooked\":\"2021-11-24T20:35:00.000+00:00\",\n\t\t\"portions\":\"4\",\n\t\t\"packages\":\"1\",\n\t\t\"price\":\"2\"\n\t}\n}"
 				},
 				"description": ""
 			},

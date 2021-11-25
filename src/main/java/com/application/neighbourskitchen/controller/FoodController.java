@@ -45,7 +45,7 @@ public class FoodController {
     @GetMapping("/getAvailableFoods")
     @ResponseBody
     public FoodSetDto getAvailableFoods(){
-        FoodSetDto allAvailableFoodsDto = new FoodSetDto(foodRepository.findByIAvailable(true));
+        FoodSetDto allAvailableFoodsDto = new FoodSetDto(foodRepository.findByIsAvailable(true));
 
         return allAvailableFoodsDto;
     }

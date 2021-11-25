@@ -1,5 +1,6 @@
 package com.application.neighbourskitchen.controller;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +18,7 @@ public class LogoutController {
 
     @PostMapping("/logout")
     @ResponseBody
-    public String logoutDo(HttpServletRequest request, HttpServletResponse response){
+    public String logoutDo(HttpServletRequest request, HttpServletResponse response, Authentication authentication){
         HttpSession session;
         SecurityContextHolder.clearContext();
         session = request.getSession(false);
@@ -27,6 +28,7 @@ public class LogoutController {
         for(Cookie cookie : request.getCookies()) {
             cookie.setMaxAge(0);
         }
+        authentication.setAuthenticated(false);
 
         return "logout";
     }

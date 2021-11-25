@@ -106,7 +106,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"username\":\"Divinesteel\",\n\t\"food\":{\n\t\t\"image\":null,\n\t\t\"title\":\"Makaronia Me Kima,\n\t\t\"description\":\"value\",\n\t\t\"timeCooked\":\"2021-11-24T20:35:00.000+00:00\",\n\t\t\"portions\":\"4\",\n\t\t\"packages\":\"1\",\n\t\t\"price\":\"2\"\n\t}\n}"
+					"raw": "{\n\t\"username\":\"Divinesteel\",\n\t\"food\":{\n\t\t\"image\":null,\n\t\t\"title\":\"Makaronia Me Kima\",\n\t\t\"description\":\"value\",\n\t\t\"timeCooked\":\"2021-11-24T20:35:00.000+00:00\",\n\t\t\"portions\":\"4\",\n\t\t\"packages\":\"1\",\n\t\t\"price\":\"2\"\n\t}\n}"
 				},
 				"url": "109.242.89.255/food/addFood"
 			},

@@ -1,6 +1,6 @@
 package com.application.neighbourskitchen.controller;
 
-import com.application.neighbourskitchen.dto.UserCredentialsDto;
+import com.application.neighbourskitchen.dto.UserWithPasswordDto;
 import com.application.neighbourskitchen.model.User;
 import com.application.neighbourskitchen.repository.UserRepository;
 import org.springframework.http.HttpStatus;
@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Set;
 
 @RestController
 public class RegistrationResource {
@@ -25,7 +23,7 @@ public class RegistrationResource {
 
     @PostMapping("/registration")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public void register(@RequestBody UserCredentialsDto userCredentialsDto) {
+    public void register(@RequestBody UserWithPasswordDto userCredentialsDto) {
         User user = User.builder()
                 .enabled(true)
                 .username(userCredentialsDto.getUsername())
@@ -35,7 +33,6 @@ public class RegistrationResource {
                 .lastName(userCredentialsDto.getLastName())
                 .phone(userCredentialsDto.getPhone())
                 .isCook(userCredentialsDto.isCook())
-                .enabled(true)
                 .openToPublic(userCredentialsDto.isOpenToPublic())
                 .build();
         userRepository.save(user);

@@ -1,15 +1,15 @@
 package com.application.neighbourskitchen.model;
 
-import com.application.neighbourskitchen.dto.UserCredentialsDto;
+import com.application.neighbourskitchen.dto.UserWithPasswordDto;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
 public class UserAuth implements UserDetails {
-    private UserCredentialsDto user;
+    private UserWithPasswordDto user;
 
-    public UserAuth(UserCredentialsDto user) {
+    public UserAuth(UserWithPasswordDto user) {
         this.user = user;
     }
 

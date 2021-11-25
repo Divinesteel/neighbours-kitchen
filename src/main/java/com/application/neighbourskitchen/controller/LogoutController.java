@@ -20,7 +20,7 @@ public class LogoutController {
     public String logoutDo(HttpServletRequest request, HttpServletResponse response){
         HttpSession session;
         SecurityContextHolder.clearContext();
-        session= request.getSession(false);
+        session = request.getSession(false);
         if(session != null) {
             session.invalidate();
         }

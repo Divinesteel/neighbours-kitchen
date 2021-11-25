@@ -49,7 +49,7 @@ public class Bootstrap implements CommandLineRunner {
                 .score(0).build();
 
         user3 = User.builder().username("GeorgeXen").password(passwordEncoder.encode("pswd")).firstName("Giorgos").lastName("Xenidis")
-                .address("Neo Faliro").isCook(false).phone(6976530703l).openToPublic(true).enabled(true)
+                .address("Neo Faliro").isCook(true).phone(6976530703l).openToPublic(true).enabled(true)
                 .score(4.5).build();
 
         food1 = new Food(null, "Gemista", "Ntomates kai  piperies", new Date("17/11/2021"), 3, true, 1, 1);

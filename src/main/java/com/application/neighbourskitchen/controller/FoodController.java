@@ -1,7 +1,7 @@
 package com.application.neighbourskitchen.controller;
 
 import com.application.neighbourskitchen.dto.FoodDetailsDto;
-import com.application.neighbourskitchen.dto.FoodListDto;
+import com.application.neighbourskitchen.dto.FoodSetDto;
 import com.application.neighbourskitchen.dto.FoodWithUserDto;
 import com.application.neighbourskitchen.exception.UnauthorizedActionException;
 import com.application.neighbourskitchen.exception.UserNotFoundException;
@@ -31,11 +31,11 @@ public class FoodController {
 
     @GetMapping("/getAllFoodsByUser/{username}")
     @ResponseBody
-    public FoodListDto getFoodDto(@PathVariable String username,Authentication authentication) {
+    public FoodSetDto getFoodDto(@PathVariable String username,Authentication authentication) {
         User user = userRepository.findByUsername(username).get();
 
         try{
-            FoodListDto foodListDto = new FoodListDto(user.getFoodList());
+            FoodSetDto foodListDto = new FoodSetDto(user.getFoodList());
 
             return foodListDto;
         }catch (RuntimeException exception){
@@ -45,8 +45,8 @@ public class FoodController {
 
     @GetMapping("/getAvailableFoods")
     @ResponseBody
-    public FoodListDto getAvailableFoods(){
-        FoodListDto allAvailableFoodsDto = new FoodListDto(foodRepository.isAvailable(true));
+    public FoodSetDto getAvailableFoods(){
+        FoodSetDto allAvailableFoodsDto = new FoodSetDto(foodRepository.findByIsAvailable(true));
 
         return allAvailableFoodsDto;
     }

@@ -11,6 +11,6 @@ import java.util.Set;
 @Component
 public interface FoodRepository extends JpaRepository<Food, Long> {
 
-    Set<Food> isAvailable(boolean availability);
+    Set<Food> findByIAvailable(boolean availability);
 
 }

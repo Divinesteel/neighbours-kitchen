@@ -8,4 +8,7 @@ public class UnauthorizedActionException extends RuntimeException {
     public UnauthorizedActionException(String username) {
         super("User " + username + " is not authorized to access this resource.");
     }
+    public UnauthorizedActionException() {
+        super("You need to log in to view the resource.");
+    }
 }

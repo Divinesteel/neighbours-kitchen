@@ -31,7 +31,7 @@ public class FoodController {
 
     @GetMapping("/getAllFoodsByUser/{username}")
     @ResponseBody
-    public FoodListDto getFoodDto(@PathVariable String username) {
+    public FoodListDto getFoodDto(@PathVariable String username,Authentication authentication) {
         User user = userRepository.findByUsername(username).get();
 
         try{

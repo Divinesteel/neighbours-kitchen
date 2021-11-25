@@ -9,8 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserCredentialsDto extends UserDetailsDto{
+public class UserWithPasswordDto extends UserDetailsDto{
 
-    private String username;
     private String password;
 }

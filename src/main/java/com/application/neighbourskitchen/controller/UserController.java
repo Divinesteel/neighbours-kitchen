@@ -1,15 +1,19 @@
 package com.application.neighbourskitchen.controller;
 
 import com.application.neighbourskitchen.dto.AllCooksListDto;
+import com.application.neighbourskitchen.dto.PurchaseSetDto;
 import com.application.neighbourskitchen.dto.UserDetailsWrapperDto;
 import com.application.neighbourskitchen.exception.UserNotVisibleException;
 import com.application.neighbourskitchen.helper.UserActions;
+import com.application.neighbourskitchen.model.Purchase;
 import com.application.neighbourskitchen.model.User;
 import com.application.neighbourskitchen.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 @Controller
 @RequestMapping("/user")
@@ -67,6 +71,40 @@ public class UserController {
             }
         };
         return userActions.verifyOwnAction(userRepository, modelMapper, auth, userDto, true);
+    }
+
+    @GetMapping("/getOrdersAsBuyer/{username}")
+    @ResponseBody
+    public PurchaseSetDto getOrdersAsBuyer(@PathVariable String username, Authentication auth){
+
+        UserDetailsWrapperDto userWrapper = new UserDetailsWrapperDto();
+        userWrapper.setUsername(username);
+        UserActions<UserDetailsWrapperDto, PurchaseSetDto> userActions = new UserActions<>() {
+            @Override
+            public PurchaseSetDto actionOnVerified(User user) {
+                Set<Purchase> purchaseSetObject = user.getPurchasesAsBuyer();
+                PurchaseSetDto purchaseSetDto = new PurchaseSetDto(purchaseSetObject);
+                return purchaseSetDto;
+            }
+        };
+        return userActions.verifyOwnAction(userRepository,modelMapper,auth,userWrapper,false);
+    }
+
+    @GetMapping("/getOrdersAsSeller/{username}")
+    @ResponseBody
+    public PurchaseSetDto getOrdersAsSeller(@PathVariable String username, Authentication auth){
+
+        UserDetailsWrapperDto userWrapper = new UserDetailsWrapperDto();
+        userWrapper.setUsername(username);
+        UserActions<UserDetailsWrapperDto, PurchaseSetDto> userActions = new UserActions<>() {
+            @Override
+            public PurchaseSetDto actionOnVerified(User user) {
+                Set<Purchase> purchaseSetObject = user.getPurchasesAsSeller();
+                PurchaseSetDto purchaseSetDto = new PurchaseSetDto(purchaseSetObject);
+                return purchaseSetDto;
+            }
+        };
+        return userActions.verifyOwnAction(userRepository,modelMapper,auth,userWrapper,false);
     }
 
 }

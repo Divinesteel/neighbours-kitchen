@@ -40,11 +40,13 @@ public class Bootstrap implements CommandLineRunner {
     }
 
     private void prepareProperties(){
-        user1 = User.builder().username("Divinesteel").password(passwordEncoder.encode("jaka2957")).firstName("Stelios").lastName("Andreolas")
+        user1 = User.builder().username("Divinesteel").password(passwordEncoder.encode("jaka2957"))
+                .firstName("Stelios").lastName("Andreolas")
                 .address("Kapodistrioy 7 Egaleo").isCook(true).phone(6955542869l).openToPublic(true).enabled(true)
                 .score(4.5).build();
 
         user2 = User.builder().username("Lauren").firstName("Sofia").lastName("Kagkelari")
+                .password(passwordEncoder.encode("123"))
                 .address("Kapodistrioy 7 Egaleo").isCook(false).phone(6954787845l).openToPublic(false).enabled(true)
                 .score(0).build();
 

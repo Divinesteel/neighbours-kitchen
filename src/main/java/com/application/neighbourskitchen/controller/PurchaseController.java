@@ -10,6 +10,7 @@ import com.application.neighbourskitchen.repository.PurchaseFoodPortionsReposito
 import com.application.neighbourskitchen.repository.PurchaseRepository;
 import com.application.neighbourskitchen.repository.UserRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,26 +36,6 @@ public class PurchaseController {
         this.modelMapper = modelMapper;
     }
 
-    @GetMapping("/myOrders/{username}")
-    @ResponseBody
-    public PurchaseSetDto myOrders(@PathVariable String username){
 
-        UserDetailsWrapperDto userWrapper = new UserDetailsWrapperDto();
-        userWrapper.setUsername(username);
-
-        UserActions<UserDetailsWrapperDto, PurchaseSetDto> userActions = new UserActions<>() {
-            @Override
-            public PurchaseSetDto actionOnVerified(User user) {
-                Set<Purchase> purchaseSetObject = purchaseRepository.findByBuyer(userRepository.findByUsername(username).get());
-
-                PurchaseSetDto purchaseSetDto = new PurchaseSetDto(purchaseSetObject);
-
-                return purchaseSetDto;
-            }
-        };
-
-        return userActions.actionOnVerified(userRepository.findByUsername(username).get());
-
-    }
 
 }

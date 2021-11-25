@@ -14,14 +14,14 @@ import java.util.*;
 public class PurchaseDetailsDto {
 
     private double price;
-    private User seller;
-    private User buyer;
+    private UserDetailsDto seller;
+    private UserDetailsDto buyer;
     private Date date;
 
     public PurchaseDetailsDto(Purchase purchase) {
         this.price = purchase.getPrice();
-        this.seller = purchase.getSeller();
-        this.buyer = purchase.getBuyer();
+        this.seller = new UserDetailsDto(purchase.getSeller());
+        this.buyer = new UserDetailsDto(purchase.getBuyer());
         this.date = purchase.getDate();
     }
 }

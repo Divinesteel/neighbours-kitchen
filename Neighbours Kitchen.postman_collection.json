@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "aaf89d74-4537-4818-a3eb-eae73fb83053",
+		"_postman_id": "d84217ad-e732-4fde-ac2c-112f265ff1b2",
 		"name": "Neighbours Kitchen",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -17,9 +17,9 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"username\":\"Divinesteel\",\n\t\"password\":\"jaka2957apujq!#\",\n\t\"firstName\":\"Stylianos\",\n\t\"lastName\":\"Andreolas\",\n\t\"address\":\"Kapodistrioy 7\",\n\t\"isCook\":true,\n\t\"phone\":\"6955542869\",\n\t\"enabled\":true\n}\n"
+					"raw": "{\"username\":\"Popo\",\n\t\"password\":\"123\",\n\t\"firstName\":\"Nikos\",\n\t\"lastName\":\"Qasa\",\n\t\"address\":\"Kapodistrioy 7\",\n\t\"cook\":true,\n\t\"phone\":\"6955542869\",\n\t\"enabled\":true\n}\n"
 				},
-				"url": "localhost:8080/registration"
+				"url": "109.242.89.255/registration"
 			},
 			"response": []
 		},
@@ -27,8 +27,13 @@
 			"name": "GetUserDetails",
 			"request": {
 				"method": "GET",
-				"header": [],
-				"url": "localhost:8080/user/getUserDetails/Divinesteel"
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic RGl2aW5lc3RlZWw6amFrYTI5NTc="
+					}
+				],
+				"url": "109.242.89.255/user/getUserBasicDetails/Divinesteel"
 			},
 			"response": []
 		},
@@ -37,7 +42,73 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "localhost:8080/food/getAllFoodsByUser/Divinesteel"
+				"url": "109.242.89.255/food/getAllFoodsByUser/Divinesteel"
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllCooksBasicDetails",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "109.242.89.255/user/getAllCooksBasicDetails"
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "109.242.89.255/logout"
+			},
+			"response": []
+		},
+		{
+			"name": "SetUserActiveStatus",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"Divinesteel\"\n,\"enabled\":\"true\"}"
+				},
+				"url": "109.242.89.255/user/setUserActiveStatus"
+			},
+			"response": []
+		},
+		{
+			"name": "AddFood",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"Divinesteel\",\n\t\"food\":{\n\t\t\"image\":null,\n\t\t\"title\":\"Makaronia Me Kima,\n\t\t\"description\":\"value\",\n\t\t\"timeCooked\":\"2021-11-24T20:35:00.000+00:00\",\n\t\t\"portions\":\"4\",\n\t\t\"packages\":\"1\",\n\t\t\"price\":\"2\"\n\t}\n}"
+				},
+				"url": "109.242.89.255/food/addFood"
 			},
 			"response": []
 		}

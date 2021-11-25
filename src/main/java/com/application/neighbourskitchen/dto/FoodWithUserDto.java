@@ -1,5 +1,6 @@
 package com.application.neighbourskitchen.dto;
 
+import com.application.neighbourskitchen.model.Food;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,8 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserCredentialsDto extends UserDetailsDto{
+public class FoodWithUserDto extends UserDetailsDto{
 
-    private String username;
-    private String password;
+    FoodDetailsDto food;
 }

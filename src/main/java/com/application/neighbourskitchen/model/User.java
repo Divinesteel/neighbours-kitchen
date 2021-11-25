@@ -2,6 +2,8 @@ package com.application.neighbourskitchen.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -10,6 +12,8 @@ import java.util.Set;
 @Entity
 @Builder
 @AllArgsConstructor
+@Getter
+@Setter
 public class User {
 
     @Id
@@ -21,7 +25,9 @@ public class User {
     private boolean isCook;
     private long phone;
     private double score;
+    private long totalSales;
     private boolean enabled;
+    private boolean openToPublic;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "seller",fetch = FetchType.EAGER)
     private Set<Purchase> purchasesAsSeller;
@@ -40,101 +46,7 @@ public class User {
         foodList.add(food);
     }
 
-    public String getFirstName() {
-        return firstName;
+    public void setUserStatus(boolean status){
+        setEnabled(status);
     }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public boolean isCook() {
-        return isCook;
-    }
-
-    public void setCook(boolean cook) {
-        isCook = cook;
-    }
-
-    public long getPhone() {
-        return phone;
-    }
-
-    public void setPhone(long phone) {
-        this.phone = phone;
-    }
-
-    public double getScore() {
-        return score;
-    }
-
-    public void setScore(double score) {
-        this.score = score;
-    }
-
-    public Set<Purchase> getPurchasesAsSeller() {
-        return purchasesAsSeller;
-    }
-
-    public void setPurchasesAsSeller(Set<Purchase> purchasesAsSeller) {
-        this.purchasesAsSeller = purchasesAsSeller;
-    }
-
-    public Set<Purchase> getPurchasesAsBuyer() {
-        return purchasesAsBuyer;
-    }
-
-    public void setPurchasesAsBuyer(Set<Purchase> purchasesAsBuyer) {
-        this.purchasesAsBuyer = purchasesAsBuyer;
-    }
-
-    public Set<Food> getFoodList() {
-        return foodList;
-    }
-
-    public void setFoodList(Set<Food> foodList) {
-        this.foodList = foodList;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-
 }

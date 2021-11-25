@@ -36,6 +36,7 @@ public class RegistrationResource {
                 .phone(userCredentialsDto.getPhone())
                 .isCook(userCredentialsDto.isCook())
                 .enabled(true)
+                .openToPublic(userCredentialsDto.isOpenToPublic())
                 .build();
         userRepository.save(user);
     }

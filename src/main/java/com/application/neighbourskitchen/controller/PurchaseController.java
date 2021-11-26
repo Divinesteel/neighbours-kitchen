@@ -63,7 +63,9 @@ public class PurchaseController {
                         .isCompleted(false)
                         .build();
 
-                PurchaseDetailsDto purchaseDetailsDto = new PurchaseDetailsDto(purchase);
+                Purchase savedPurchase = purchaseRepository.save(purchase);
+
+                PurchaseDetailsDto purchaseDetailsDto = new PurchaseDetailsDto(savedPurchase);
                 return purchaseDetailsDto;
             }
         };

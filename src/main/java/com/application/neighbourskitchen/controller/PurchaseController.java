@@ -35,25 +35,22 @@ public class PurchaseController {
 
     @PostMapping("/addNewPurchase")
     @ResponseBody
-    public PurchaseDetailsDto addNewPurchase(Purchase newPurchase){
+    public PurchaseDetailsDto addNewPurchase(PurchaseDetailsDto purchaseDetailsDto){
 
-        UserDetailsDto buyerDetailsDto = new UserDetailsDto(buyer);
-        UserDetailsWrapperDto buyerWrapper = new UserDetailsWrapperDto();
+        UserDetailsDto buyerDto = purchaseDetailsDto.getBuyer();
+        UserDetailsWrapperDto buyerWrapperDto = new UserDetailsWrapperDto();
 
-        UserActions<UserDetailsWrapperDto, PurchaseDetailsDto> buyersNewPurchaseAction = new UserActions<UserDetailsWrapperDto, PurchaseDetailsDto>() {
+        UserActions<UserDetailsWrapperDto, PurchaseDetailsDto> buyerNewPurchaseAction = new UserActions<UserDetailsWrapperDto, PurchaseDetailsDto>() {
             @Override
             public PurchaseDetailsDto actionOnVerified(User buyer) {
 
-                Purchase newPurchase = new Purchase(price, seller, buyer, new Date(), false);
-                purchaseRepository.save(newPurchase);
+                Purchase purchase = new Purchase(newPurchase.getPrice(), newPurchase.getSeller(), newPurchase.getBuyer(), new Date());
+                PurchaseDetailsDto purchaseDetailsDto = new PurchaseDetailsDto(purchase);
 
-                PurchaseDetailsDto newPurchaseDetailsDto = new PurchaseDetailsDto(newPurchase);
-
-                return newPurchaseDetailsDto;
             }
-        };
+                return null;
+            }
+        }
 
-        return buyersNewPurchaseAction.verifyOwnAction(userRepository, modelMapper, auth, buyerWrapper, false);
-    }
-
+        return null;
 }

@@ -34,7 +34,7 @@ public class Purchase {
     *A @NoArgsConstructor takes place right here!
     */
 
-    public Purchase(double price, User seller, User buyer, Date date, boolean isCompleted) {
+    public Purchase(double price, User seller, User buyer, Date date) {
         this.price = price;
         this.seller = seller;
         this.buyer = buyer;

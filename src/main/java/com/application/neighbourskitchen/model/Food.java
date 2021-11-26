@@ -2,6 +2,8 @@ package com.application.neighbourskitchen.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.*;
@@ -9,6 +11,8 @@ import java.util.*;
 @Entity
 @Builder
 @AllArgsConstructor
+@Getter
+@Setter
 public class Food {
 
     @Id
@@ -18,7 +22,8 @@ public class Food {
     private String title;
     private String description;
     private Date timeCooked;
-    private int portions;
+    private int realPortions;
+    private int virtualPortions;
     private boolean isAvailable;
     private int packages;
     private double price;
@@ -42,7 +47,7 @@ public class Food {
         this.title = title;
         this.description = description;
         this.timeCooked = timeCooked;
-        this.portions = portions;
+        this.realPortions = portions;
         this.isAvailable = isAvailable;
         this.packages = packages;
         this.price = price;
@@ -54,93 +59,5 @@ public class Food {
 
     public void setPurchasePortions(List<PurchaseFoodPortions> purchasePortions) {
         this.purchasePortions = purchasePortions;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(Byte[] image) {
-        this.image = image;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Date getTimeCooked() {
-        return timeCooked;
-    }
-
-    public void setTimeCooked(Date timeCooked) {
-        this.timeCooked = timeCooked;
-    }
-
-    public int getPortions() {
-        return portions;
-    }
-
-    public void setPortions(int portions) {
-        this.portions = portions;
-    }
-
-    public boolean isAvailable() {
-        return isAvailable;
-    }
-
-    public void setAvailable(boolean available) {
-        isAvailable = available;
-    }
-
-    public int getPackages() {
-        return packages;
-    }
-
-    public void setPackages(int packages) {
-        this.packages = packages;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public Set<Category> getCategorySet() {
-        return categorySet;
-    }
-
-    public void setCategorySet(Set<Category> categorySet) {
-        this.categorySet = categorySet;
-    }
-
-    public User getCook() {
-        return cook;
-    }
-
-    public void setCook(User cook) {
-        this.cook = cook;
     }
 }

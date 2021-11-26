@@ -3,7 +3,6 @@ package com.application.neighbourskitchen.controller;
 import com.application.neighbourskitchen.dto.FoodDetailsDto;
 import com.application.neighbourskitchen.dto.FoodSetDto;
 import com.application.neighbourskitchen.dto.FoodWithUserDto;
-import com.application.neighbourskitchen.exception.UnauthorizedActionException;
 import com.application.neighbourskitchen.exception.UserNotFoundException;
 import com.application.neighbourskitchen.helper.UserActions;
 import com.application.neighbourskitchen.model.Food;
@@ -60,7 +59,8 @@ public class FoodController {
             public FoodDetailsDto actionOnVerified(User user) {
                 Food food = Food.builder().image(foodWithUserDto.getFood().getImage())
                         .description(foodWithUserDto.getFood().getDescription())
-                        .portions(foodWithUserDto.getFood().getPortions())
+                        .realPortions(foodWithUserDto.getFood().getRealPortions())
+                        .virtualPortions(foodWithUserDto.getFood().getVirtualPortions())
                         .packages(foodWithUserDto.getFood().getPackages())
                         .price(foodWithUserDto.getFood().getPrice())
                         .timeCooked(foodWithUserDto.getFood().getTimeCooked())
@@ -73,9 +73,7 @@ public class FoodController {
                 return modelMapper.map(savedFood,FoodDetailsDto.class);
             }
         };
-
         return userActions.verifyOwnAction(userRepository,modelMapper,auth,foodWithUserDto,false);
-
     }
 
 }

@@ -1,24 +1,21 @@
 package com.application.neighbourskitchen.controller;
 
-import com.application.neighbourskitchen.dto.PurchaseSetDto;
+import com.application.neighbourskitchen.dto.PurchaseDetailsDto;
+import com.application.neighbourskitchen.dto.UserDetailsDto;
 import com.application.neighbourskitchen.dto.UserDetailsWrapperDto;
 import com.application.neighbourskitchen.helper.UserActions;
+import com.application.neighbourskitchen.model.Food;
 import com.application.neighbourskitchen.model.Purchase;
 import com.application.neighbourskitchen.model.User;
 import com.application.neighbourskitchen.repository.FoodRepository;
-import com.application.neighbourskitchen.repository.PurchaseFoodPortionsRepository;
 import com.application.neighbourskitchen.repository.PurchaseRepository;
 import com.application.neighbourskitchen.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/purchase")
@@ -36,6 +33,27 @@ public class PurchaseController {
         this.modelMapper = modelMapper;
     }
 
+    @PostMapping("/addNewPurchase")
+    @ResponseBody
+    public PurchaseDetailsDto addNewPurchase(Purchase newPurchase){
 
+        UserDetailsDto buyerDetailsDto = new UserDetailsDto(buyer);
+        UserDetailsWrapperDto buyerWrapper = new UserDetailsWrapperDto();
+
+        UserActions<UserDetailsWrapperDto, PurchaseDetailsDto> buyersNewPurchaseAction = new UserActions<UserDetailsWrapperDto, PurchaseDetailsDto>() {
+            @Override
+            public PurchaseDetailsDto actionOnVerified(User buyer) {
+
+                Purchase newPurchase = new Purchase(price, seller, buyer, new Date(), false);
+                purchaseRepository.save(newPurchase);
+
+                PurchaseDetailsDto newPurchaseDetailsDto = new PurchaseDetailsDto(newPurchase);
+
+                return newPurchaseDetailsDto;
+            }
+        };
+
+        return buyersNewPurchaseAction.verifyOwnAction(userRepository, modelMapper, auth, buyerWrapper, false);
+    }
 
 }

@@ -14,4 +14,6 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
 
     Set<Purchase> findByBuyer(User buyer/*!Finds by Buyer's Username!*/);
 
+    Set<Purchase> findByIsCompleted(boolean isCompleted);
+
 }

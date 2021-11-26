@@ -1,11 +1,13 @@
 package com.application.neighbourskitchen.model;
 
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
 
+@NoArgsConstructor
 @Entity
 //@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Purchase {
@@ -23,17 +25,21 @@ public class Purchase {
 
     private Date date;
 
+    private boolean isCompleted;
+
     @OneToMany(mappedBy = "purchase", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PurchaseFoodPortions> foodPortions=new ArrayList<>();
 
-    public Purchase() {
-    }
+    /*
+    *A @NoArgsConstructor takes place right here!
+    */
 
-    public Purchase(double price, User seller, User buyer, Date date) {
+    public Purchase(double price, User seller, User buyer, Date date, boolean isCompleted) {
         this.price = price;
         this.seller = seller;
         this.buyer = buyer;
         this.date = date;
+        this.isCompleted = isCompleted;
     }
 
     public PurchaseFoodPortions addFood(Food food,int portion) {
@@ -104,6 +110,14 @@ public class Purchase {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted(boolean completed) {
+        isCompleted = completed;
     }
 
     @Override

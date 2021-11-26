@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "fb5fca78-6edd-4721-84a0-a6bca4b68dd8",
+		"_postman_id": "b956ac52-1b5a-44bb-8030-2421d1adfb39",
 		"name": "Neighbours Kitchen",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -124,7 +124,7 @@
 				},
 				"method": "GET",
 				"header": [],
-				"url": "localhost:8080/user/getOrdersAsBuyer/Lauren"
+				"url": "109.242.89.255/user/getOrdersAsBuyer/Lauren"
 			},
 			"response": []
 		},
@@ -133,7 +133,59 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "localhost:8080/user/getOrdersAsSeller/Lauren"
+				"url": "109.242.89.255/user/getOrdersAsSeller/Lauren"
+			},
+			"response": []
+		},
+		{
+			"name": "ModifyUserDetails",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"password": "jaka2957",
+						"username": "Divinesteel"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"_comment\": \"Only firstName,lastName,address,phone can be modified.\",\r\n    \"username\":\"Divinesteel\",\r\n\t\"firstName\":\"Stelios\",\r\n\t\"lastName\":\"Andreolas\",\r\n\t\"address\":\"Kapodistrioy 7\",\r\n\t\"cook\":true,\r\n\t\"phone\":\"6955542869\"\r\n}"
+				},
+				"url": "109.242.89.255/user/modifyUserDetails"
+			},
+			"response": []
+		},
+		{
+			"name": "AddNewPurchase",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"password": "jaka2957",
+						"username": "Divinesteel"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"price\":\"1.1\",\r\n\t\"seller\" : {\r\n        \"username\":\"GeorgeXen\"\r\n    },\r\n\t\"buyer\": {\r\n        \"username\":\"Divinesteel\"\r\n    }\r\n}\r\n"
+				},
+				"url": "109.242.89.255/purchase/addNewPurchase"
 			},
 			"response": []
 		}

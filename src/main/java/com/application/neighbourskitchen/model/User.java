@@ -1,5 +1,6 @@
 package com.application.neighbourskitchen.model;
 
+import com.application.neighbourskitchen.dto.UserDetailsDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -48,5 +49,12 @@ public class User {
 
     public void setUserStatus(boolean status){
         setEnabled(status);
+    }
+
+    public void modifyDetails(UserDetailsDto userDto){
+        this.firstName=userDto.getFirstName();
+        this.lastName=userDto.getLastName();
+        this.address=userDto.getAddress();
+        this.phone=userDto.getPhone();
     }
 }

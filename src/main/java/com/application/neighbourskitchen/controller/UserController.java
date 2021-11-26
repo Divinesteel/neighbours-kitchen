@@ -2,6 +2,7 @@ package com.application.neighbourskitchen.controller;
 
 import com.application.neighbourskitchen.dto.AllCooksListDto;
 import com.application.neighbourskitchen.dto.PurchaseSetDto;
+import com.application.neighbourskitchen.dto.UserDetailsDto;
 import com.application.neighbourskitchen.dto.UserDetailsWrapperDto;
 import com.application.neighbourskitchen.exception.UserNotVisibleException;
 import com.application.neighbourskitchen.helper.UserActions;
@@ -102,6 +103,23 @@ public class UserController {
                 Set<Purchase> purchaseSetObject = user.getPurchasesAsSeller();
                 PurchaseSetDto purchaseSetDto = new PurchaseSetDto(purchaseSetObject);
                 return purchaseSetDto;
+            }
+        };
+        return userActions.verifyOwnAction(userRepository,modelMapper,auth,userWrapper,false);
+    }
+
+    @PostMapping("/modifyUserDetails")
+    @ResponseBody
+    public UserDetailsDto getOrdersAsSeller(@RequestBody UserDetailsDto userDto, Authentication auth){
+
+        UserDetailsWrapperDto userWrapper = new UserDetailsWrapperDto(userDto);
+        UserActions<UserDetailsWrapperDto, UserDetailsDto> userActions = new UserActions<>() {
+            @Override
+            public UserDetailsDto actionOnVerified(User user) {
+                user.modifyDetails((UserDetailsDto)userWrapper);
+                User savedUser = userRepository.save(user);
+                UserDetailsDto savedUserDto = new UserDetailsDto(savedUser);
+                return savedUserDto;
             }
         };
         return userActions.verifyOwnAction(userRepository,modelMapper,auth,userWrapper,false);

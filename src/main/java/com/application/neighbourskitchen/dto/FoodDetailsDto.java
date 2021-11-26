@@ -1,16 +1,9 @@
 package com.application.neighbourskitchen.dto;
 
-import com.application.neighbourskitchen.model.Category;
 import com.application.neighbourskitchen.model.Food;
-import com.application.neighbourskitchen.model.PurchaseFoodPortions;
-import com.application.neighbourskitchen.model.User;
 import lombok.*;
 
-import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
 
 @Builder
 @AllArgsConstructor
@@ -25,7 +18,8 @@ public class FoodDetailsDto {
         title = food.getTitle();
         description = food.getDescription();
         timeCooked = food.getTimeCooked();
-        portions = food.getPortions();
+        realPortions = food.getRealPortions();
+        virtualPortions = food.getVirtualPortions();
         isAvailable = food.isAvailable();
         packages = food.getPackages();
         price = food.getPrice();
@@ -36,7 +30,8 @@ public class FoodDetailsDto {
     private String title;
     private String description;
     private Date timeCooked;
-    private int portions;
+    private int realPortions;
+    private int virtualPortions;
     private boolean isAvailable;
     private int packages;
     private double price;

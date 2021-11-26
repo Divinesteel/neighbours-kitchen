@@ -104,7 +104,7 @@ public class Bootstrap implements CommandLineRunner {
         foodRepository.save(food1);
         foodRepository.save(food2);
 
-        Purchase purchase = new Purchase(2, user1, user2, new Date(), true);
+        Purchase purchase = Purchase.builder().buyer(user2).seller(user1).price(2).date(new Date()).isCompleted(false).build();
         purchaseRepository.save(purchase);
 
         PurchaseFoodPortions a = purchase.addFood(food1, 2);

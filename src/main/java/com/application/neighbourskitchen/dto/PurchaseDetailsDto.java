@@ -2,12 +2,14 @@ package com.application.neighbourskitchen.dto;
 
 import com.application.neighbourskitchen.model.Purchase;
 import com.application.neighbourskitchen.model.User;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.*;
 
+@AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter

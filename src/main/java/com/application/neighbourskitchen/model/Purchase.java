@@ -1,6 +1,6 @@
 package com.application.neighbourskitchen.model;
 
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
@@ -9,6 +9,10 @@ import java.util.*;
 
 @NoArgsConstructor
 @Entity
+@Builder
+@Getter
+@Setter
+@AllArgsConstructor
 //@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Purchase {
 
@@ -28,22 +32,13 @@ public class Purchase {
     private boolean isCompleted;
 
     @OneToMany(mappedBy = "purchase", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PurchaseFoodPortions> foodPortions=new ArrayList<>();
-
-    /*
-    *A @NoArgsConstructor takes place right here!
-    */
-
-    public Purchase(double price, User seller, User buyer, Date date) {
-        this.price = price;
-        this.seller = seller;
-        this.buyer = buyer;
-        this.date = date;
-        this.isCompleted = isCompleted;
-    }
+    private List<PurchaseFoodPortions> foodPortions;
 
     public PurchaseFoodPortions addFood(Food food,int portion) {
         PurchaseFoodPortions purchaseFoodPortions = new PurchaseFoodPortions(this, food,portion);
+        if(foodPortions==null){
+            foodPortions = new ArrayList<>();
+        }
         foodPortions.add(purchaseFoodPortions);
         food.getPurchasePortions().add(purchaseFoodPortions);
         return purchaseFoodPortions;
@@ -64,72 +59,16 @@ public class Purchase {
         }
     }
 
-    public List<PurchaseFoodPortions> getFoodPortions() {
-        return foodPortions;
-    }
-
-    public void setFoodPortions(List<PurchaseFoodPortions> foodPortions) {
-        this.foodPortions = foodPortions;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public User getSeller() {
-        return seller;
-    }
-
-    public void setSeller(User seller) {
-        this.seller = seller;
-    }
-
-    public User getBuyer() {
-        return buyer;
-    }
-
-    public void setBuyer(User buyer) {
-        this.buyer = buyer;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public boolean isCompleted() {
-        return isCompleted;
-    }
-
-    public void setCompleted(boolean completed) {
-        isCompleted = completed;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Purchase purchase = (Purchase) o;
-        return Double.compare(purchase.price, price) == 0 && Objects.equals(id, purchase.id) && Objects.equals(seller, purchase.seller) && Objects.equals(buyer, purchase.buyer) && Objects.equals(date, purchase.date) && Objects.equals(foodPortions, purchase.foodPortions);
+        return Double.compare(purchase.price, price) == 0 && isCompleted == purchase.isCompleted && Objects.equals(id, purchase.id) && Objects.equals(seller, purchase.seller) && Objects.equals(buyer, purchase.buyer) && Objects.equals(date, purchase.date) && Objects.equals(foodPortions, purchase.foodPortions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, price, seller, buyer, date, foodPortions);
+        return Objects.hash(id, price, seller, buyer, date, isCompleted, foodPortions);
     }
 }

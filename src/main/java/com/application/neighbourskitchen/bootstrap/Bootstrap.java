@@ -101,16 +101,22 @@ public class Bootstrap implements CommandLineRunner {
                 add(c3);
             }
         });
-        foodRepository.save(food1);
-        foodRepository.save(food2);
+        Food savedFood1 = foodRepository.save(food1);
+        Food retrievedFood = foodRepository.findById(savedFood1.getId()).get();
+//        foodRepository.save(food2);
 
-        Purchase purchase = Purchase.builder().buyer(user2).seller(user1).price(2).date(new Date()).isCompleted(false).build();
-        purchaseRepository.save(purchase);
+        Purchase purchase = Purchase.builder().buyer(user2).seller(user1).price(0).date(new Date()).isCompleted(false).build();
+        Purchase savedPurchase = purchaseRepository.save(purchase);
+        Purchase retrievedPurchase = purchaseRepository.findById(savedPurchase.getId()).get();
 
-        PurchaseFoodPortions a = purchase.addFood(food1, 2);
-        PurchaseFoodPortions b = purchase.addFood(food2, 1);
+        retrievedFood.setRealPortions(retrievedFood.getRealPortions()-2);
+        Food savedFood11 = foodRepository.save(retrievedFood);
+        retrievedPurchase.setPrice(retrievedPurchase.getPrice()+(savedFood11.getPrice()*2));
+
+        PurchaseFoodPortions a = retrievedPurchase.addFood(savedFood11, 2);
+//        PurchaseFoodPortions b = purchase.addFood(food2, 1);
         purchaseFoodPortionsRepository.save(a);
-        purchaseFoodPortionsRepository.save(b);
+//        purchaseFoodPortionsRepository.save(b);
         System.out.println(userRepository.findById("Divinesteel").get().getPurchasesAsSeller().stream().findFirst().get().getSeller().getFirstName());
 
         System.out.println(userRepository.findById("Divinesteel").get().getFoodList().stream().findFirst().get().getTitle());

@@ -15,6 +15,7 @@ import java.util.*;
 @Getter
 public class PurchaseDetailsDto {
 
+    private long id;
     private double price;
     private UserDetailsDto seller;
     private UserDetailsDto buyer;
@@ -22,6 +23,7 @@ public class PurchaseDetailsDto {
     private boolean isCompleted;
 
     public PurchaseDetailsDto(Purchase purchase) {
+        this.id = purchase.getId();
         this.price = purchase.getPrice();
         this.seller = new UserDetailsDto(purchase.getSeller());
         this.buyer = new UserDetailsDto(purchase.getBuyer());

@@ -31,7 +31,7 @@ public class Purchase {
 
     private boolean isCompleted;
 
-    @OneToMany(mappedBy = "purchase", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "purchase", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
     private List<PurchaseFoodPortions> foodPortions;
 
     public PurchaseFoodPortions addFood(Food food,int portion) {

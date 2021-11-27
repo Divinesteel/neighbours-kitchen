@@ -14,11 +14,11 @@ public class PurchaseFoodPortions {
     @EmbeddedId
     private PurchaseFoodId purchaseFoodId = new PurchaseFoodId();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @MapsId("comPurchaseId")
     private Purchase purchase;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @MapsId("comFoodId")
     private Food food;
 

@@ -17,6 +17,6 @@ public class PurchaseFoodPortionsDto {
     public PurchaseFoodPortionsDto(PurchaseFoodPortions purchaseFoodPortions) {
         this.purchase = new PurchaseDetailsDto(purchaseFoodPortions.getPurchase());
         this.food = new FoodDetailsDto(purchaseFoodPortions.getFood());
-        this.portions = portions;
+        this.portions = purchaseFoodPortions.getPortions();
     }
 }

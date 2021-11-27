@@ -60,7 +60,7 @@ public class FoodController {
                 Food food = Food.builder().image(foodWithUserDto.getFood().getImage())
                         .description(foodWithUserDto.getFood().getDescription())
                         .realPortions(foodWithUserDto.getFood().getRealPortions())
-                        .virtualPortions(foodWithUserDto.getFood().getVirtualPortions())
+                        .virtualPortions(foodWithUserDto.getFood().getRealPortions())
                         .packages(foodWithUserDto.getFood().getPackages())
                         .price(foodWithUserDto.getFood().getPrice())
                         .timeCooked(foodWithUserDto.getFood().getTimeCooked())

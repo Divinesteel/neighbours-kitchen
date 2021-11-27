@@ -15,10 +15,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Controller
@@ -41,7 +43,8 @@ public class PurchaseController {
 
     @PostMapping("/addNewPurchase")
     @ResponseBody
-    public PurchaseDetailsDto addNewPurchase(@RequestBody PurchaseDetailsDto purchaseDetailsDto, Authentication auth){
+    @Transactional
+    public PurchaseDetailsDto addNewPurchase(@RequestBody PurchaseDetailsDto purchaseDetailsDto, Authentication auth) {
 
         UserDetailsDto buyerDto = purchaseDetailsDto.getBuyer();
         UserDetailsWrapperDto buyerWrapperDto = new UserDetailsWrapperDto(buyerDto);
@@ -51,10 +54,10 @@ public class PurchaseController {
             public PurchaseDetailsDto actionOnVerified(User buyer) {
                 String sellerUsername = purchaseDetailsDto.getSeller().getUsername();
                 String buyerUsername = buyer.getUsername();
-                if(sellerUsername.equals(buyerUsername))throw new CannotBuyFromSelf(buyer.getUsername());
+                if (sellerUsername.equals(buyerUsername)) throw new CannotBuyFromSelf(buyer.getUsername());
                 Optional<User> sellerOpt = userRepository.findByUsername(sellerUsername);
-                if(!sellerOpt.isPresent())throw new UserNotFoundException(sellerUsername);
-                if(!sellerOpt.get().isCook())throw new SellerIsNotACook(sellerUsername);
+                if (!sellerOpt.isPresent()) throw new UserNotFoundException(sellerUsername);
+                if (!sellerOpt.get().isCook()) throw new SellerIsNotACook(sellerUsername);
 
                 Purchase purchase = Purchase.builder()
                         .price(0.0)
@@ -75,27 +78,34 @@ public class PurchaseController {
 
     @PostMapping("/addFoodOnPurchase")
     @ResponseBody
-    public PurchaseFoodPortionsDto addFoodOnPurchase(@RequestBody PurchaseFoodDto purchaseFoodDto, Authentication auth){
+    @Transactional
+    public PurchaseFoodPortionsDto addFoodOnPurchase(@RequestBody PurchaseFoodDto purchaseFoodDto, Authentication auth) {
 
         UserActions<PurchaseFoodDto, PurchaseFoodPortionsDto> userActions = new UserActions<>() {
             @Override
             public PurchaseFoodPortionsDto actionOnVerified(User buyer) {
+
                 Optional<Food> foodOpt = foodRepository.findById(purchaseFoodDto.getFood().getId());
-                if(!foodOpt.isPresent()) throw new FoodNotFoundException(purchaseFoodDto.getFood().getId());
+                if (!foodOpt.isPresent()) throw new FoodNotFoundException(purchaseFoodDto.getFood().getId());
                 Food food = foodOpt.get();
 
                 Optional<Purchase> purchaseOpt = purchaseRepository.findById(purchaseFoodDto.getPurchase().getId());
-                if(!purchaseOpt.isPresent()) throw new PurchaseNotFoundException(purchaseFoodDto.getPurchase().getId());
+                if (!purchaseOpt.isPresent())
+                    throw new PurchaseNotFoundException(purchaseFoodDto.getPurchase().getId());
                 Purchase purchase = purchaseOpt.get();
 
-                if(!purchase.getBuyer().getUsername().equals(purchaseFoodDto.getUsername())) throw new UnauthorizedActionException(purchaseFoodDto.getUsername());
-                if(food.getRealPortions()<purchaseFoodDto.getPortions()) throw new FoodPortionsAreNotAvailableException(purchaseFoodDto.getPortions());
+                if (!purchase.getBuyer().getUsername().equals(purchaseFoodDto.getUsername()))
+                    throw new UnauthorizedActionException(purchaseFoodDto.getUsername());
+                if (!purchase.getSeller().equals(food.getCook()))
+                    throw new PurchaseSellerFoodCookAreDifferent(purchase.getSeller(), food.getCook());
+                if (food.getVirtualPortions() < purchaseFoodDto.getPortions())
+                    throw new FoodPortionsAreNotAvailableException(purchaseFoodDto.getPortions());
 
-                food.setRealPortions(food.getRealPortions()-purchaseFoodDto.getPortions());
-                Food savedFood = foodRepository.save(food);
+                food.setVirtualPortions(food.getVirtualPortions() - purchaseFoodDto.getPortions());
+                purchase.setPrice(purchase.getPrice() + (food.getPrice() * purchaseFoodDto.getPortions()));
 
-                purchase.setPrice(purchase.getPrice()+(savedFood.getPrice()*purchaseFoodDto.getPortions()));
-                PurchaseFoodPortions purchaseFoodPortions = purchase.addFood(savedFood,purchaseFoodDto.getPortions());
+                PurchaseFoodPortions purchaseFoodPortions = purchase.addFood(food, purchaseFoodDto.getPortions());
+                purchaseFoodPortionsRepository.flush();
                 PurchaseFoodPortions savedPurchaseFoodPortions = purchaseFoodPortionsRepository.save(purchaseFoodPortions);
 
                 return new PurchaseFoodPortionsDto(savedPurchaseFoodPortions);

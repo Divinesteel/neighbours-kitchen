@@ -15,7 +15,7 @@ import java.util.*;
 @Getter
 public class PurchaseDetailsDto {
 
-    private long id;
+    private Long id;
     private double price;
     private UserDetailsDto seller;
     private UserDetailsDto buyer;

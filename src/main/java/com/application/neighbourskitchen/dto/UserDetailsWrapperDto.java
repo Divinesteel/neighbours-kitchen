@@ -14,11 +14,11 @@ public class UserDetailsWrapperDto extends UserDetailsDto {
     public UserDetailsWrapperDto(UserDetailsDto userDto) {
         this.setUsername(userDto.getUsername());
         this.setAddress(userDto.getAddress());
-        this.setCook(userDto.isCook());
+        this.setIsCook(userDto.getIsCook());
         this.setFirstName(userDto.getFirstName());
         this.setLastName(userDto.getLastName());
-        this.setOpenToPublic(userDto.isOpenToPublic());
+        this.setOpenToPublic(userDto.getOpenToPublic());
         this.setPhone(userDto.getPhone());
-        this.setEnabled(userDto.isEnabled());
+        this.setEnabled(userDto.getEnabled());
     }
 }

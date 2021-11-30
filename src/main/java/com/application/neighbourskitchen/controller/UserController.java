@@ -66,7 +66,7 @@ public class UserController {
         UserActions<UserDetailsWrapperDto, UserDetailsWrapperDto> userActions = new UserActions<UserDetailsWrapperDto, UserDetailsWrapperDto>() {
             @Override
             public UserDetailsWrapperDto actionOnVerified(User user) {
-                user.setUserStatus(userDto.isEnabled());
+                user.setUserStatus(userDto.getEnabled());
                 userRepository.save(user);
                 return modelMapper.map(user, UserDetailsWrapperDto.class);
             }
@@ -102,6 +102,7 @@ public class UserController {
             public PurchaseSetDto actionOnVerified(User user) {
                 Set<Purchase> purchaseSetObject = user.getPurchasesAsSeller();
                 PurchaseSetDto purchaseSetDto = new PurchaseSetDto(purchaseSetObject);
+                purchaseSetDto.setBuyersPrivate();
                 return purchaseSetDto;
             }
         };

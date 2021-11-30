@@ -21,6 +21,13 @@ public class PurchaseSetDto {
         purchaseSetObject.stream().forEach(purchase -> {
             this.purchaseSetDto.add(new PurchaseDetailsDto(purchase));
         });
-
+    }
+    public void setBuyersPrivate(){
+        for (PurchaseDetailsDto purchaseDetailsDto: purchaseSetDto) {
+            UserDetailsDto buyer = purchaseDetailsDto.getBuyer();
+            if(!buyer.getOpenToPublic()){
+                buyer.setUserPrivate();
+            }
+        }
     }
 }

@@ -49,7 +49,7 @@ public class PurchaseController {
         UserDetailsDto buyerDto = purchaseDetailsDto.getBuyer();
         UserDetailsWrapperDto buyerWrapperDto = new UserDetailsWrapperDto(buyerDto);
 
-        UserActions<UserDetailsWrapperDto, PurchaseDetailsDto> buyerNewPurchaseAction = new UserActions<UserDetailsWrapperDto, PurchaseDetailsDto>() {
+        UserActions<UserDetailsWrapperDto, PurchaseDetailsDto> buyerNewPurchaseAction = new UserActions<>() {
             @Override
             public PurchaseDetailsDto actionOnVerified(User buyer) {
                 String sellerUsername = purchaseDetailsDto.getSeller().getUsername();

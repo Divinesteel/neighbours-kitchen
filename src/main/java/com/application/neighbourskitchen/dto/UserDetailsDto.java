@@ -18,10 +18,10 @@ public class UserDetailsDto {
     private String firstName;
     private String lastName;
     private String address;
-    private boolean isCook;
-    private long phone;
-    private boolean enabled;
-    private boolean openToPublic;
+    private Boolean isCook;
+    private Long phone;
+    private Boolean enabled;
+    private Boolean openToPublic;
 
     public UserDetailsDto(User user) {
         this.username = user.getUsername();
@@ -32,5 +32,12 @@ public class UserDetailsDto {
         this.phone = user.getPhone();
         this.enabled = user.isEnabled();
         this.openToPublic = user.isOpenToPublic();
+    }
+
+    public void setUserPrivate(){
+        address = null;
+        phone = null;
+        isCook = null;
+        enabled = null;
     }
 }

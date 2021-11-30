@@ -84,9 +84,9 @@ public class StartingTests {
         assertEquals(userRepository.findById("Divinesteel").get().getFoodList().stream().findFirst().get().getTitle(), "Gemista");
     }
 
-    @Test
-    public void findCategoriesForFood() {
-
-        assertEquals(userRepository.findById("Divinesteel").get().getFoodList().stream().findFirst().get().getTitle(), "Gemista");
-    }
+//    @Test
+//    public void findCategoriesForFood() {
+//
+//        assertEquals(userRepository.findById("Divinesteel").get().getFoodList().stream().findFirst().get().getTitle(), "Gemista");
+//    }
 }

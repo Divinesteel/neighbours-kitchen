@@ -32,8 +32,8 @@ public class RegistrationResource {
                 .firstName(userCredentialsDto.getFirstName())
                 .lastName(userCredentialsDto.getLastName())
                 .phone(userCredentialsDto.getPhone())
-                .isCook(userCredentialsDto.isCook())
-                .openToPublic(userCredentialsDto.isOpenToPublic())
+                .isCook(userCredentialsDto.getIsCook())
+                .openToPublic(userCredentialsDto.getOpenToPublic())
                 .build();
         userRepository.save(user);
     }

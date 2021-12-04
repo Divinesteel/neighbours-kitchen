@@ -66,6 +66,8 @@ public class Bootstrap implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        if(userRepository.findById("Divinesteel").isPresent())return;
+
         prepareProperties();
 
         userRepository.save(user1);
